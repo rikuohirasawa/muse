@@ -2,7 +2,7 @@ import { useEffect } from "react";
 
 const App = () => {
   useEffect(()=>{
-    fetch('/hi')
+    fetch('/testing')
     .then(res=>res.json())
     .then(data=>console.log(data))
   })

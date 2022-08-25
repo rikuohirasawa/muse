@@ -1,13 +1,9 @@
 const express = require('express');
 const morgan = require('morgan');
+const {getArtIds} = require('./handlers/apiCalls')
 
 express()
-    .get('/hi', (req, res) =>{
-        res.status(200).json({
-            status: 200,
-            message: 'success'
-        })
-    })
+    .get('/testing', getArtIds)
 
     .listen(8000, ()=>{
         console.log('server launched on 8000')
