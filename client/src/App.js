@@ -1,9 +1,9 @@
-import { GlobalStyle } from "./GlobalStyles";
-import { Header } from "./Header";
-import { HomePage } from "./Homepage";
+import { GlobalStyle } from './GlobalStyles';
 
+import { HomePage } from './Homepage';
 
-import { useEffect } from "react";
+import { BrowserRouter } from 'react-router-dom';
+import { useEffect } from 'react';
 
 const App = () => {
   useEffect(()=>{
@@ -13,12 +13,12 @@ const App = () => {
   })
   return (
     <>
-    <Header/>
-    <GlobalStyle/>
-    <HomePage/>
+    <BrowserRouter>
+      <GlobalStyle/>
+      <HomePage/>
     {/* <img src='https://www.artic.edu/iiif/2/1adf2696-8489-499b-cad2-821d7fde4b33/full/843,/0/default.jpg'/> */}
-    </>
-    
+    </BrowserRouter>
+    </> 
   );
 }
 
