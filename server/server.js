@@ -1,4 +1,5 @@
 const express = require('express');
+const morgan = require('morgan');
 
 express()
     .get('/hi', (req, res) =>{
