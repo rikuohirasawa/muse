@@ -4,8 +4,14 @@ import { SideBar } from './SideBar';
 import { Header } from './Header';
 import { Footer } from './Footer';
 
+import { useEffect } from 'react';
 
 export const HomePage = () => {
+    useEffect(()=>{
+        fetch('/api/sample-art')
+            .then(res=>res.json())
+            .then(data=>console.log(data))
+    })
     return (
         <>
         <FlexContainer>
