@@ -1,6 +1,7 @@
 import { GlobalStyle } from './GlobalStyles';
 import { HomePage } from './Homepage';
 import { ViewSampleArt } from './ViewSampleArt';
+import { ArtworkDetails } from './ArtworkDetails';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useEffect } from 'react';
@@ -19,6 +20,7 @@ const App = () => {
       <Routes>
         <Route exact path='/' element={<HomePage/>}/>
         <Route exact path='/muse' element={<ViewSampleArt/>}/>
+        <Route exact path='/artwork/:id' element={<ArtworkDetails/>}/>
  
       </Routes>
     {/* <img src='https://www.artic.edu/iiif/2/1adf2696-8489-499b-cad2-821d7fde4b33/full/843,/0/default.jpg'/> */}
