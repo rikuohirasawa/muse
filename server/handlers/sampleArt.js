@@ -8,7 +8,7 @@ const getSampleArt = async (req, res) => {
         // an array of art that are very similar - array is limited to length of 8 as API throttles
         // at 60 calls/minute (loop is making 8 individual calls)
         let getRandomArtArray = [];
-        for (let i=0; i <8; i++) {
+        for (let i=0; i <2; i++) {
             const randomPage = Math.floor(Math.random() * 8000 + 1)
             const options = {
                 uri: `https://api.artic.edu/api/v1/artworks?page=${randomPage}&limit=1&fields=id,title,artist_titles,category_titles,date_display,place_of_origin,image_id,thumbnail`,
