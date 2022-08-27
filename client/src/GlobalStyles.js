@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
+import styled from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
     body {
@@ -8,3 +9,8 @@ export const GlobalStyle = createGlobalStyle`
         background: #000000;
         color: #fff;
     }`
+
+export const Line = styled.div`
+    width: 100%;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    margin: 4px 0;`

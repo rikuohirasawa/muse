@@ -2,7 +2,7 @@ import styled from "styled-components"
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/swiper.min.css'
 import { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, Link } from "react-router-dom"
 
 
 export const ViewSampleArt = () => {
@@ -39,10 +39,10 @@ export const ViewSampleArt = () => {
                                 <InformationContainer>
                                     <div>{element.title}</div>
                                     {element.artist_titles.length === 0 ? 
-                                    <ArtistName>Unknown</ArtistName>
+                                    <div>Unknown</div>
                                     :
                                     element.artist_titles.map(e=>{
-                                    return <ArtistName>{e}</ArtistName>
+                                    return <Link to={`/artist/${e}`} style={{color: '#fff'}}>{e}</Link>
                                 })}
                                     <Line/>
                                     <div>{element.date_display}</div>
@@ -87,7 +87,7 @@ const InformationContainer = styled.div`
     flex-direction: column;
     gap: 6px;`
 
-const ArtistName = styled.div``
+const div = styled.div``
 
 const Line = styled.div`
     width: 100%;
