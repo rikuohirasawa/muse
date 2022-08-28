@@ -41,7 +41,7 @@ export const ArtistDetails = () => {
                 <h1>{artistName}</h1>
                 <Line/>
                 <Content>
-                    {artistInfo.map(element=>{
+                    {artistInfo.map((element, index)=>{
                         return (
                             <ArtPieceContainer>
                                 <Image src={`https://www.artic.edu/iiif/2/${element.image_id}/full/843,/0/default.jpg`}/>
@@ -53,7 +53,6 @@ export const ArtistDetails = () => {
                             </ArtPieceContainer>             
                         )
                     })}
-
                 </Content>
             </>
         )
@@ -65,14 +64,29 @@ export const ArtistDetails = () => {
 
 }
 
-const Content = styled.div``
+const Content = styled.div`
+    display: grid;
+
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-auto-flow: dense;
+    align-items: flex-start;
+    border: 1px solid red;
+    height: auto;
+    grid-column-gap: -1rem;
+    grid-row-gap: 0rem;
+
+    `
 
 const ArtPieceContainer = styled.div`
 width: 400px;
+height: fit-content;
 display: flex;
 flex-direction: column;
 align-items: center;
+text-align: center;
 gap: 8px;
+border: 1px solid purple;
+margin: 0;
 
 .categories {
     :not(:last-child) {

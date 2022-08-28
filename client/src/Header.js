@@ -6,6 +6,9 @@ export const Header = () => {
         <Wrapper>
             <LogoText to='/'>Muse</LogoText>
             <Content>
+                <SearchBar>
+                    <input type='text'/>
+                </SearchBar>
                 <div>Browse</div>
                 <div>About</div>
                 <div>Shop</div>
@@ -32,3 +35,7 @@ const Content = styled.div`
 display: flex;
 gap: 1.25rem;`
 
+const SearchBar = styled.form`
+`
+
+const SearchButton = styled.button``
