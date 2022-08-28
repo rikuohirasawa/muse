@@ -1,38 +1,33 @@
 import styled from "styled-components"
 import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
+import { useParams, useNavigate } from "react-router-dom"
 import { Line } from "./GlobalStyles"
 
 export const ArtistDetails = () => {
     const artistName = (useParams().name)
     const [artistInfo, setArtistInfo] = useState(null);
 
-
     useEffect(()=>{
-
         // this particular fetch returns very small low quality thumbnail images for each artwork
         // to work around this, the artwork ids returned from the first fetch are pushed to an
-        // array, and then used to in a second fetch to retrieve images
-        let idArray = []
-        let idk = ''
-
+        // array, and then used in a second fetch to retrieve images
         fetch(`https://api.artic.edu/api/v1/artworks/search?q=${artistName}`)
         .then(res=>res.json())
         .then(data=>{
+            let idArray = []
             data.data.forEach(e=>{
                 idArray.push(e.id)
             })
-            console.log(data.data)
-        }).then(
-            fetch(`https://api.artic.edu/api/v1/artworks?ids=${idArray.join(',')}
-            &fields=title,id,image_id,date_display,category_titles`)
+            console.log(idArray)
+            return idArray
+        }).then((ids)=> {
+            fetch(`https://api.artic.edu/api/v1/artworks?ids=${ids.join(',')}
+            &fields=title,id,image_id,date_display,category_titles,artist_title`)
             .then(res=>res.json())
             .then(data=>{
-                console.log(idArray.join(','))
-                console.log(data)
                 setArtistInfo(data.data)
             })
-        )
+        })
     }, [])
 
     if (artistInfo) {
