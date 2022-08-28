@@ -2,6 +2,7 @@ import styled from "styled-components"
 import { useEffect, useState } from "react"
 import { useParams, Link } from "react-router-dom"
 import {IoIosArrowDown, IoIosArrowUp} from 'react-icons/io'
+import {Line, LinkPath} from './GlobalStyles'
 
 export const ArtworkDetails = () => {
     const artworkId = parseInt(useParams().id);
@@ -40,7 +41,7 @@ export const ArtworkDetails = () => {
                     <div>Unknown</div>
                     :
                     artworkDetails.artist_titles.map(e=>{
-                        return <Link to={`/artist/${e}`} style={{color: '#fff'}}>{e}</Link>
+                        return <LinkPath to={`/artist/${e}`}>{e}</LinkPath>
                     })}
                     <Line/>
                     <div>{artworkDetails.date_display}</div>
@@ -49,7 +50,7 @@ export const ArtworkDetails = () => {
                         <>
                             <Line/>
                             {artworkDetails.category_titles.map(e=>{
-                                return <div> {e} </div>
+                                return <LinkPath to={`/collection/${e}`}> {e} </LinkPath>
                                 
                                 })}
                         </>
@@ -147,11 +148,6 @@ const InformationContainer = styled.div`
     display: flex;
     flex-direction: column;
     gap: 6px;`
-
-const Line = styled.div`
-    width: 100%;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-    margin: 4px 0;`
 
 const ApiLink = styled.a`
     color: #fff;

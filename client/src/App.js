@@ -28,7 +28,7 @@ const App = () => {
         <Route exact path='/artist/:name' element={<ArtistDetails/>}/>
         <Route exact path='/login' element={<LoginPage/>}/>
         <Route exact path='/about' element={<About/>}/>
-        <Route exact path='/collections/:search' element={<SearchCollection/>}/>
+        <Route exact path='/collection/:search' element={<SearchCollection/>}/>
       </Routes>
     {/* <img src='https://www.artic.edu/iiif/2/1adf2696-8489-499b-cad2-821d7fde4b33/full/843,/0/default.jpg'/> */}
     </BrowserRouter>

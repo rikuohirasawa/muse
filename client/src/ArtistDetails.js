@@ -1,11 +1,14 @@
 import styled from "styled-components"
 import { useEffect, useState } from "react"
 import { useParams, useNavigate } from "react-router-dom"
-import { Line } from "./GlobalStyles"
+import { Line, LinkPath } from "./GlobalStyles"
 
 export const ArtistDetails = () => {
-    const artistName = (useParams().name)
+    const navigate = useNavigate();
     const [artistInfo, setArtistInfo] = useState(null);
+    const artistName = useParams().name
+
+
 
     useEffect(()=>{
         // this particular fetch returns very small low quality thumbnail images for each artwork
@@ -38,11 +41,13 @@ export const ArtistDetails = () => {
                 <Content>
                     {artistInfo.map((element, index)=>{
                         return (
-                            <ArtPieceContainer>
-                                <Image src={`https://www.artic.edu/iiif/2/${element.image_id}/full/843,/0/default.jpg`}/>
+                            <ArtPieceContainer >
+                                <Image 
+                                src={`https://www.artic.edu/iiif/2/${element.image_id}/full/843,/0/default.jpg`}
+                                onClick={()=>{navigate(`/artwork/${element.id}`)}}/>
                                 <div>{element.title} ({element.date_display})</div>
                                 <div>{element.category_titles.map(e=>{
-                                    return <span className='categories'> {e} </span>
+                                    return <LinkPath to={`/collection/${e}`} className='categories'> {e} </LinkPath>
                                 })}</div>
                                 <Line/>
                             </ArtPieceContainer>             
@@ -65,7 +70,6 @@ const Content = styled.div`
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-auto-flow: dense;
     align-items: flex-start;
-    border: 1px solid red;
     height: auto;
     grid-column-gap: -1rem;
     grid-row-gap: 0rem;
@@ -80,8 +84,6 @@ flex-direction: column;
 align-items: center;
 text-align: center;
 gap: 8px;
-border: 1px solid purple;
-margin: 0;
 
 .categories {
     :not(:last-child) {
@@ -91,4 +93,5 @@ margin: 0;
 }`
 
 const Image = styled.img`
-width: 100%;`
+width: 100%;
+cursor: pointer;`

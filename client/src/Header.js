@@ -9,6 +9,7 @@ export const Header = () => {
         e.preventDefault();
         const searchForm = new FormData(document.forms.searchBar);
         const input = searchForm.get('search');
+        navigate(`/collection/${input}`)
     };
 
     return (
@@ -20,7 +21,7 @@ export const Header = () => {
                     <SearchButton type='submit'><SearchIcon/></SearchButton>
                 </SearchBar>
                 <div>Browse</div>
-                <div>About</div>
+                <div onClick={()=>{navigate('/about')}} style={{cursor: 'pointer'}}>About</div>
                 <div>Shop</div>
             </Content>
         </Wrapper>
