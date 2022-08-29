@@ -20,9 +20,9 @@ export const Header = () => {
                     <SearchInput type='text' placeholder='e.g. Monet' name='search'/>
                     <SearchButton type='submit'><SearchIcon/></SearchButton>
                 </SearchBar>
-                <div>Browse</div>
-                <div onClick={()=>{navigate('/about')}} style={{cursor: 'pointer'}}>About</div>
-                <div>Shop</div>
+                <HeaderLink to='/'>Profile</HeaderLink>
+                <HeaderLink to='/'>Sign In</HeaderLink>
+                <HeaderLink to='/about'>About</HeaderLink>
             </Content>
         </Wrapper>
     )
@@ -42,6 +42,7 @@ font-size: 1.25rem;
 color: #fff;
 text-decoration: none;
 `
+
 const Content = styled.div`
 display: flex;
 align-items: center;
@@ -73,5 +74,15 @@ const SearchIcon = styled(AiOutlineSearch)`
 transition: all .2s ease-in-out;
 &:hover {
     transform: scale(1.2)
+}
+`
+
+const HeaderLink = styled(Link)`
+color: #fff;
+text-decoration: none;
+transition: all .1s ease-in-out;
+&:hover,
+&:focus {
+    transform: scale(1.1)
 }
 `

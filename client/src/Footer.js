@@ -4,13 +4,11 @@ import {AiOutlineGithub, AiOutlineLinkedin} from 'react-icons/ai'
 export const Footer = () => {
     return (
         <Wrapper>
-            <StyleLink to='https://api.artic.edu/docs/'>API Documentation</StyleLink>
+            <ApiDoc href='https://api.artic.edu/docs/'>API Documentation</ApiDoc>
             <IconLinks>
-                <AiOutlineLinkedin/>
-                <AiOutlineGithub/>
+                <ExternalLink href='https://www.linkedin.com/in/rikuo-hirasawa-5085b9229/'><AiOutlineLinkedin/></ExternalLink>
+                <ExternalLink href='https://github.com/rikuohirasawa?tab=repositories'><AiOutlineGithub/></ExternalLink>
             </IconLinks>
-
-
         </Wrapper>
     )
 }
@@ -25,8 +23,30 @@ padding-top: 8px;`
 
 const IconLinks = styled.div`
 display: flex;
+align-items: center;
 gap: 1rem;
 font-size: 1.25rem;
+`
+
+const ApiDoc = styled.a`
+color: #fff;
+text-decoration: none;
+transition: all .1s ease-in-out;
+&:hover,
+&:focus {
+    transform: scale(1.1)
+}
+`
+
+const ExternalLink = styled.a`
+color: #fff;
+text-decoration: none;
+transition: all .1s ease-in-out;
+&:hover,
+&:focus {
+    transform: scale(1.2)
+}
+font-size: 1.5rem;
 `
 
 const StyleLink = styled(Link)`
