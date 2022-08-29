@@ -12,9 +12,8 @@ express()
     .get('/testing', getArtIds)
     .get('/api/sample-art', getSampleArt)
     //user endpoints for database
-    .post('/user/new-user', addNewUser)
-
     .get('/user/:email', getUserByEmail)
+    .post('/user/new-user', addNewUser)
 
     .patch('/user/update-user', updateUserProfile)
 

@@ -53,8 +53,14 @@ border-bottom: 1px solid #E3E2E2;
 const LogoText = styled(Link)`
 font-weight: 700;
 font-size: 1.25rem;
-color: #fff;
+color: inherit;
 text-decoration: none;
+transition: all .1s ease-in-out;
+
+&:hover,
+&:focus {
+    transform: scale(1.1)
+    };
 `
 
 const Content = styled.div`
@@ -92,11 +98,11 @@ transition: all .2s ease-in-out;
 `
 
 const HeaderLink = styled(Link)`
-color: #fff;
+color: inherit;
 text-decoration: none;
 transition: all .1s ease-in-out;
 &:hover,
 &:focus {
     transform: scale(1.1)
-}
+};
 `

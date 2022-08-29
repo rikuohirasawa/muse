@@ -18,7 +18,7 @@ const App = () => {
     .then(res=>res.json())
     .then(data=>console.log(data))
   })
-  console.log(Math.floor(Math.random() * 1000 + 1))
+
   return (
     <>
     <BrowserRouter>

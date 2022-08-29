@@ -15,7 +15,7 @@ export const Footer = () => {
 
 const Wrapper = styled.div`
 display: flex;
-border-top: 1px solid white;
+border-top: 1px solid #E3E2E2;;
 justify-content: center;
 align-items: center;
 gap: 1rem;
@@ -29,7 +29,7 @@ font-size: 1.25rem;
 `
 
 const ApiDoc = styled.a`
-color: #fff;
+color: inherit;
 text-decoration: none;
 transition: all .1s ease-in-out;
 &:hover,
@@ -39,7 +39,7 @@ transition: all .1s ease-in-out;
 `
 
 const ExternalLink = styled.a`
-color: #fff;
+color: inherit;
 text-decoration: none;
 transition: all .1s ease-in-out;
 &:hover,
@@ -50,6 +50,6 @@ font-size: 1.5rem;
 `
 
 const StyleLink = styled(Link)`
-color: #fff;
+color: inherit;
 text-decoration: none;
 `

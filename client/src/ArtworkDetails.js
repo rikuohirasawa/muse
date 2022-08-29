@@ -150,7 +150,7 @@ const InformationContainer = styled.div`
     gap: 6px;`
 
 const ApiLink = styled.a`
-    color: #fff;
+    color: inherit;
 `
 
 

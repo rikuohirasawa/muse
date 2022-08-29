@@ -87,7 +87,7 @@ const updateUserProfile = async (req, res) => {
     const db = client.db('muse');
     try {
     await client.connect();
-    const updateUser = await db.collection('users').updateOne(
+    const updateUser = await db.collection('users').findOneAndUpdate(
         { email: req.body.email },
         {$set: 
             {
@@ -99,10 +99,14 @@ const updateUserProfile = async (req, res) => {
             favorites: []
         }}, { upsert: false }
     );
-    if (updateUser) {
+    console.log(updateUser.value)
+    // previously I tried to use updateOne instead of findOneAndUpdate and it returned
+    // only information regarding the update itself, and not the item itself 
+    // this solution is not nearly as clean but does return the value I'm looking for
+    if (updateUser.value && Object.values(updateUser.value).length > 0) {
         res.status(200).json({
             status: 200,
-            data: updateUser
+            data: updateUser.value
         })
     } else {
         res.status(404).json({
