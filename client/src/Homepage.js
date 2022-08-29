@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-
+import { Line } from './GlobalStyles';
 import { SideBar } from './SideBar';
 import { Header } from './Header';
 import { Footer } from './Footer';
@@ -16,8 +16,16 @@ export const HomePage = () => {
             <TextWrapper>
                 <HeadingTextSmall>Art Institute of</HeadingTextSmall>
                 <BgContainer><HeadingTextLarge>Chicago</HeadingTextLarge></BgContainer>
-
             </TextWrapper>
+            
+            <Line/>
+            <StatsContainer>
+                <div>300K Artworks</div>
+                <div>1.5M Annual Visitors</div>
+                <div>EST. 1879</div>
+            </StatsContainer>
+            <Line/>
+            
             </Content>
         </FlexContainer>
         <Footer/>
@@ -35,7 +43,7 @@ width: 100%;`
 
 
 const TextWrapper = styled.div`
-@keyframes slideInFromRight {
+/* @keyframes slideInFromRight {
   0% {
     transform: translateX(100%);
   }
@@ -51,7 +59,7 @@ const TextWrapper = styled.div`
   100% {
     transform: translateX(0);
   }
-}
+} */
 
 @keyframes animate {
     from {
@@ -81,16 +89,15 @@ font-size: 60px;
 `
 
 const BgContainer = styled.div`
-/* background-image: url(https://www.artic.edu/iiif/2/1adf2696-8489-499b-cad2-821d7fde4b33/full/843,/0/default.jpg); */
 animation: 2s ease-in 0s 1 fadein;
 margin: 0;
-
 padding: 0;
-margin: -120px 0 0 0;
+margin: -130px 0 0 0;
 
 
 `
 const HeadingTextLarge = styled.h1`
+filter: grayscale(100%);
 background-image: url(https://www.artic.edu/iiif/2/1adf2696-8489-499b-cad2-821d7fde4b33/full/843,/0/default.jpg);
 -webkit-text-fill-color: transparent;
 -webkit-background-clip: text;
@@ -98,18 +105,18 @@ background-image: url(https://www.artic.edu/iiif/2/1adf2696-8489-499b-cad2-821d7
 animation: animate 6s forwards;
 font-size: 180px;
 background-position: center;
-
-
-
 /* background-clip: text;
 -webkit-background-clip: text;
 font-size: 180px;
 margin: 0;
 padding: 0;
 border: 1px solid red;
-
 color: transparent;
 background-clip: text;
 -webkit-background-clip: text;
 background-position: center; */
 `
+
+const StatsContainer = styled.div`
+display: flex;
+justify-content: space-evenly;`

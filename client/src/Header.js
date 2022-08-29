@@ -1,6 +1,9 @@
-import styled from 'styled-components'
-import {AiOutlineSearch} from 'react-icons/ai'
-import { Link, useNavigate } from 'react-router-dom'
+import styled from 'styled-components';
+import {AiOutlineSearch} from 'react-icons/ai';
+import { Link, useNavigate } from 'react-router-dom';
+import { SignInButton } from './SignInButton';
+import { SignOutButton } from './SignOutButton';
+import { useAuth0 } from "@auth0/auth0-react";
 
 export const Header = () => {
 
@@ -12,6 +15,11 @@ export const Header = () => {
         navigate(`/collection/${input}`)
     };
 
+    const { user, isAuthenticated, isLoading } = useAuth0();
+    console.log(user)
+    console.log(isAuthenticated)
+    console.log(isLoading)
+
     return (
         <Wrapper>
             <LogoText to='/'>Muse</LogoText>
@@ -21,7 +29,8 @@ export const Header = () => {
                     <SearchButton type='submit'><SearchIcon/></SearchButton>
                 </SearchBar>
                 <HeaderLink to='/'>Profile</HeaderLink>
-                <HeaderLink to='/'>Sign In</HeaderLink>
+                <SignInButton>Sign In</SignInButton>
+                <SignOutButton/>
                 <HeaderLink to='/about'>About</HeaderLink>
             </Content>
         </Wrapper>

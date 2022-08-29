@@ -3,12 +3,13 @@ import { HomePage } from './Homepage';
 import { ViewSampleArt } from './ViewSampleArt';
 import { ArtworkDetails } from './ArtworkDetails';
 import { ArtistDetails } from './ArtistDetails';
-import { LoginPage } from './LoginPage';
 import { About } from './About';
+import { SignInPage } from './SignInPage';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useEffect } from 'react';
 import { SearchCollection } from './SearchCollection';
+
 
 const App = () => {
   useEffect(()=>{
@@ -26,7 +27,7 @@ const App = () => {
         <Route exact path='/muse' element={<ViewSampleArt/>}/>
         <Route exact path='/artwork/:id' element={<ArtworkDetails/>}/>
         <Route exact path='/artist/:name' element={<ArtistDetails/>}/>
-        <Route exact path='/login' element={<LoginPage/>}/>
+        <Route exact path='/login' element={<SignInPage/>}/>
         <Route exact path='/about' element={<About/>}/>
         <Route exact path='/collection/:search' element={<SearchCollection/>}/>
       </Routes>
