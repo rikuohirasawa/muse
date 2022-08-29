@@ -45,11 +45,15 @@ const getUserByEmail = async (req, res) => {
 const addNewUser = async (req, res) => {
     const client = new MongoClient(MONGO_URI, options);
     const db = client.db('muse');
+    console.log(req.body)
     try {
         await client.connect();
         const user = await db.collection('users').findOne({email: req.body.email});
         if (user) {
-            return;
+            return res.status(200).json({
+                status: 200,
+                message: 'User already exists'
+            })
         } else {
             const newUser = await db.collection('users').insertOne({
                 email: req.body.email,

@@ -12,17 +12,30 @@ export const Profile = () => {
         fetch('https://api.artic.edu/api/v1/artworks?ids=35772,126289,94020,212427,190300&fields=image_id')
         .then(res=>res.json())
         .then(data=>setPlaceholderAvatars(data.data))
-    },[])
+    },[]);
 
+    useEffect(()=>{
+    // get req for user
+    }, [])
+    console.log(user)
     const saveChanges = (e) => {
         e.preventDefault();
+        const form = new FormData(document.forms.shipDetailsForm);
+        const formObj = {
+            email: user.email,
+            name: form.get('name'),
+            avatarSrc: 'https://www.artic.edu/iiif/2/126289/full/843,/0/default.jpg',
+            bio: form.get('bio'),
+        }
+        fetch('')
+
     }
     
     if (placeholderAvatars) {
         return (
             <>
             <h1>Let's set up your profile</h1>
-            <ProfileForm>
+            <ProfileForm id='profileForm'>
                 <Label for='name'>Name</Label>
                 <Input type='text' name='name' id='name' required/>
                 <div>Upload an avatar, or choose one below for now (you can change this later).</div>
