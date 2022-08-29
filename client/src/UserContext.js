@@ -4,6 +4,7 @@ export const UserContext = createContext(null);
 
 const initialState = {
     profileSetup: false,
+    userInfo: null
 };
 
 const reducer = (state, action) => {
@@ -13,7 +14,13 @@ const reducer = (state, action) => {
                 ...state,
                 profileSetup: true
             }
-        } default: throw new Error ('Reducer/dispatch error')
+        } case 'set-user-info': {
+            return {
+                ...state,
+                userInfo: action.userInfo
+            }
+        }
+        default: throw new Error ('Reducer/dispatch error')
     }
 };
 

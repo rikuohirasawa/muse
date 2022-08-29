@@ -5,6 +5,7 @@ import { ArtworkDetails } from './ArtworkDetails';
 import { ArtistDetails } from './ArtistDetails';
 import { About } from './About';
 import { SignInPage } from './SignInPage';
+import { Profile } from './Profile';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useEffect } from 'react';
@@ -30,6 +31,7 @@ const App = () => {
         <Route exact path='/login' element={<SignInPage/>}/>
         <Route exact path='/about' element={<About/>}/>
         <Route exact path='/collection/:search' element={<SearchCollection/>}/>
+        <Route exact path='/profile' element={<Profile/>}/>
       </Routes>
     {/* <img src='https://www.artic.edu/iiif/2/1adf2696-8489-499b-cad2-821d7fde4b33/full/843,/0/default.jpg'/> */}
     </BrowserRouter>

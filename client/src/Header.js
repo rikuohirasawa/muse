@@ -1,9 +1,12 @@
 import styled from 'styled-components';
+
 import {AiOutlineSearch} from 'react-icons/ai';
 import { Link, useNavigate } from 'react-router-dom';
 import { SignInButton } from './SignInButton';
 import { SignOutButton } from './SignOutButton';
 import { useAuth0 } from "@auth0/auth0-react";
+
+import { useEffect } from 'react';
 
 export const Header = () => {
 
@@ -18,7 +21,6 @@ export const Header = () => {
     const { user, isAuthenticated, isLoading } = useAuth0();
     console.log(user)
     console.log(isAuthenticated)
-    console.log(isLoading)
 
     return (
         <Wrapper>
@@ -28,9 +30,12 @@ export const Header = () => {
                     <SearchInput type='text' placeholder='e.g. Monet' name='search'/>
                     <SearchButton type='submit'><SearchIcon/></SearchButton>
                 </SearchBar>
-                <HeaderLink to='/'>Profile</HeaderLink>
-                <SignInButton>Sign In</SignInButton>
+                <HeaderLink to='/profile'>Profile</HeaderLink>
+                {isAuthenticated ?
                 <SignOutButton/>
+                : 
+                <SignInButton/>
+                }
                 <HeaderLink to='/about'>About</HeaderLink>
             </Content>
         </Wrapper>

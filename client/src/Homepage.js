@@ -3,7 +3,6 @@ import { Line } from './GlobalStyles';
 import { SideBar } from './SideBar';
 import { Header } from './Header';
 import { Footer } from './Footer';
-
 import { useEffect } from 'react';
 
 export const HomePage = () => {

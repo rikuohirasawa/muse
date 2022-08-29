@@ -5,7 +5,7 @@ export const SignOutButton = () => {
 
   return (
     <button onClick={() => logout({ returnTo: window.location.origin })}>
-      Log Out
+      Sign Out
     </button>
   );
 };
