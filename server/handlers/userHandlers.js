@@ -52,7 +52,7 @@ const addNewUser = async (req, res) => {
         if (user) {
             return res.status(200).json({
                 status: 200,
-                message: 'User already exists'
+                data: user
             })
         } else {
             const newUser = await db.collection('users').insertOne({
@@ -61,9 +61,13 @@ const addNewUser = async (req, res) => {
                 profileSetup: false
             })
             if (newUser) {
-                res.status(200).json({
-                    status: 200,
-                    data: newUser
+                res.status(201).json({
+                    status: 201,
+                    data: {
+                    email: req.body.email,
+                    nickname: req.body.nickname,
+                    profileSetup: false
+                    }
                 })
             } else {
                 res.status(400).json({
@@ -95,10 +99,12 @@ const updateUserProfile = async (req, res) => {
             name: req.body.name,
             bio: req.body.bio,
             profileSetup: true,
-            friends: [],
+            following: [],
+            followers: [],
             favorites: []
         }}, { upsert: false }
     );
+    console.log(req.body.bio)
     console.log(updateUser.value)
     // previously I tried to use updateOne instead of findOneAndUpdate and it returned
     // only information regarding the update itself, and not the item itself 

@@ -6,32 +6,43 @@ import { useEffect, useState, useContext } from 'react'
 export const Profile = () => {
     const { user, isAuthenticated, isLoading } = useAuth0();
     const [placeholderAvatars, setPlaceholderAvatars] = useState(null);
-    const [userInfo, setUserInfo] = useState(null);
-    const {dispatch} = useContext(UserContext);
+    const [selectAvatar, setSelectAvatar] = useState(null);
+    const [bioLength, setBioLength] = useState(120);
+    const {dispatch, userInfo} = useContext(UserContext);
     
     useEffect(()=>{
-        fetch('https://api.artic.edu/api/v1/artworks?ids=35772,126289,94020,212427,190300&fields=image_id')
+        fetch('https://api.artic.edu/api/v1/artworks?ids=35772,126289,212427,190300&fields=image_id')
         .then(res=>res.json())
         .then(data=>setPlaceholderAvatars(data.data))
     },[]);
 
-    useEffect(()=>{
-    // get req for user
-    if (isAuthenticated) {
-        fetch(`/user/`)
+    // useEffect(()=>{
+    // // get req for user
+    // if (isAuthenticated) {
+    //     fetch(`/user/`)
+    // }
+    // }, [isAuthenticated])
+    // console.log(user)
+
+    const clickAvatar = (image) => {
+        setSelectAvatar(image)
+        console.log(selectAvatar)
     }
-    }, [isAuthenticated])
-    console.log(user)
+
+    const textAreaLengthFx = (e) => {
+        setBioLength(120 - e.target.value.length)
+    }
     
     const saveChanges = (e) => {
         e.preventDefault();
-        const form = new FormData(document.forms.shipDetailsForm);
+        const form = new FormData(document.forms.profileForm);
         const formObj = {
             email: user.email,
             name: form.get('name'),
-            avatarSrc: 'https://www.artic.edu/iiif/2/126289/full/843,/0/default.jpg',
+            avatarSrc: selectAvatar,
             bio: form.get('bio'),
         }
+        console.log(form.get('bio'))
         fetch('user/update-user', {
             method: 'PATCH',
             headers: {
@@ -42,7 +53,14 @@ export const Profile = () => {
         .catch(err=>console.log(err.message))
     }
     
-    if (placeholderAvatars) {
+    if (userInfo.profileSetup) {
+        return (
+            <>
+            </>
+        )
+
+    }
+    else if (placeholderAvatars) {
         return (
             <>
             <h1 style={{textAlign: 'center'}}>Let's set up your profile</h1>
@@ -56,13 +74,21 @@ export const Profile = () => {
                 <div className='avatar-container'>
                 {placeholderAvatars.map(e=>{
                     return (
-                        <Placeholder src={`https://www.artic.edu/iiif/2/${e.image_id}/full/843,/0/default.jpg`}/>
+                        <PickAvatar src={`https://www.artic.edu/iiif/2/${e.image_id}/full/843,/0/default.jpg`}
+                        onClick={()=>{clickAvatar(`https://www.artic.edu/iiif/2/${e.image_id}/full/843,/0/default.jpg`)}}
+                        style={{opacity: 
+                            selectAvatar === `https://www.artic.edu/iiif/2/${e.image_id}/full/843,/0/default.jpg`
+                            ? '100%'
+                            : '40%'}}
+                        />
                     )
                 })}
                 </div>
                 <div className='container'>
                 <Label for='bio'>Add a bio (optional)</Label>
-                <Bio name='bio' id='bio'/>  
+                <Bio name='bio' id='bio' maxLength='120'
+                onInput={(e)=>{textAreaLengthFx(e)}}/> 
+                <div>{bioLength}</div> 
                 </div>
                 <SaveButton type='submit'>Save Changes</SaveButton>
             </ProfileForm>
@@ -112,12 +138,19 @@ font-size: 1.5rem;
 resize: none;
 `
 
-const Placeholder = styled.img`
+const PickAvatar = styled.img`
 width: 140px;
 height: 140px;
 object-fit: cover;
-border-radius: 50%;`
+border-radius: 50%;
 
+cursor: pointer;
+transition: all .1s ease-in-out;
+&:hover,
+&:focus {
+    transform: scale(1.1)
+};
+`
 const SaveButton = styled.button`
 background: #fff;
 border: 1px solid black;
