@@ -3,13 +3,34 @@ import { useEffect, useState } from "react"
 import { useParams, Link } from "react-router-dom"
 import {IoIosArrowDown, IoIosArrowUp} from 'react-icons/io'
 import {Line, LinkPath} from './GlobalStyles'
+import { useContext } from "react"
+import { UserContext } from "./UserContext"
+import { addToFavorites } from "./utils"
+
+
 
 export const ArtworkDetails = () => {
     const artworkId = parseInt(useParams().id);
     const [artworkDetails, setArtworkDetails] = useState(null);
-    
     const [provDisplay, setProvDisplay] = useState(false);
     const [exhibitionDisplay, setExhibitionDisplay] = useState(false);
+
+    const {userInfo, dispatch} = useContext(UserContext);
+    
+    // const addFavorites = (email, id) => {
+    //         fetch('/user/update-favorites', {
+    //         method: 'PATCH',
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         }, body: JSON.stringify({
+    //             email: email,
+    //             artworkId: id
+    //         })
+    //     }).then(res=>res.json())
+    //     .then(data=>dispatch({type: 'update-user-favorites', favorites: data.value.favorites}))
+    //     .catch(err=>console.log(err.message))
+
+    // }
 
     const toggleProvDisplay = () => {
         setProvDisplay(!provDisplay)
@@ -103,12 +124,17 @@ export const ArtworkDetails = () => {
                         }
                     </>
                     }
-                </ReadMoreContainer>      
+                </ReadMoreContainer>  
+                <button onClick={()=>{
+                    if (!userInfo.favorites.includes(artworkDetails.id)) {
+                        addToFavorites(userInfo.email, artworkDetails.id, dispatch)
+                    } else {
+                        console.log('already favorited')
+                    }
+                }}>add</button>    
             </Content>
-
         )
     }
-
 }
 
 const Content = styled.div`

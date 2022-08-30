@@ -6,6 +6,7 @@ import { ProfileSetup } from './ProfileSetup';
 
 export const Profile = () => {
     const {dispatch, userInfo} = useContext(UserContext);
+    const [userCollection, setUserCollection] = useState(null);
     
 
     if (userInfo.profileSetup) {
@@ -15,10 +16,8 @@ export const Profile = () => {
             <Avatar src={userInfo.avatarSrc}/>
             <h1>{userInfo.name}</h1>
             </FlexContainer>
-            <Feed></Feed>
             <UserCollection>
                 <h2>Your Collection</h2>
-
             </UserCollection>
             </>
         )

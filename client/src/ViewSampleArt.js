@@ -24,17 +24,12 @@ export const ViewSampleArt = () => {
     }, []);
     if (sampleArt.length > 0) {
         return (
-            <>
+            <Container>
             <Swiper slidesPerView={1}>
-                {sampleArt.map((element, index)=>{
+              {sampleArt.map((element, index)=>{
+                    if (element.image_id) {
                     return (
-                        <SwiperSlide key={index} style={{
-                            display: 'flex', 
-                            flexDirection: 'column',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            height: '100vh'
-                            }}>
+                        <SwiperSlide>
                             <Content>
                                 <InformationContainer>
                                     <div>{element.title}</div>
@@ -56,23 +51,51 @@ export const ViewSampleArt = () => {
                                         </>
                                         }
                                 </InformationContainer>
+                                {console.log(element.thumbnail.alt_text)}
                                 <Image 
                                 src={`https://www.artic.edu/iiif/2/${element.image_id}/full/843,/0/default.jpg`} 
-                                alt={element.thumbnail && element.thumbnail.alt_text} onClick={()=>{handleClick(element.id)}}/>
+                               onClick={()=>{handleClick(element.id)}}/>
                             </Content>
-                        </SwiperSlide>
-                    )
-                })}
-            </Swiper>       
-            </>
-        )
-    }
+                            </SwiperSlide>)}})}
+                            </Swiper>
+            </Container>
+                    
+            )}
+                            }
+
+
+// alt={element.thumbnail && element.thumbnail.alt_text}
+const Container = styled.div`
+
+/* display: flex;
+align-items: center;
+justify-content: center; */
+
+.swiper-slide {
+    /* display: 'flex'; 
+    flex-direction: 'column';
+    justify-content: 'center';
+    align-items: 'center'; */
+    height: '100%';
 }
 
+.swiper-container {
+
+}
+
+.swiper-wrapper {
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+`
 const Content = styled.div`
     display: flex;
     align-items: center;
-    gap: 4rem;
+    justify-content: center;
+    height: 100%;
+    margin: auto;
+
 `
 
 const Image = styled.img`
@@ -83,6 +106,7 @@ const Image = styled.img`
 
 const InformationContainer = styled.div`
     width: 100%;
+    max-width: 250px;
     display: flex;
     flex-direction: column;
     gap: 6px;`

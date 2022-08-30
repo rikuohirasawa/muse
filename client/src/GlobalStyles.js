@@ -7,8 +7,8 @@ export const GlobalStyle = createGlobalStyle`
         margin: 0;
         padding: 0;
         font-family: 'Raleway', sans-serif;
-        color: #000000;
-        background: #fff;
+        /* color: #000000;
+        background: #fff; */
     }`
 
 export const Line = styled.div`

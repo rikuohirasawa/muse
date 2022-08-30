@@ -70,7 +70,7 @@ const addNewUser = async (req, res) => {
                     }
                 })
             } else {
-                res.status(400).json({
+                res.status(404).json({
                     status: 404,
                     message: 'Error adding user to database'
                 })

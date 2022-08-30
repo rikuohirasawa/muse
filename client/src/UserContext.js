@@ -1,3 +1,4 @@
+
 import { createContext, useReducer } from "react";
 
 export const UserContext = createContext(null);
@@ -20,6 +21,14 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 userInfo: action.userInfo
+            }
+        } case 'update-user-favorites': {
+            return {
+                ...state,
+                userInfo: {
+                    ...state.userInfo,
+                    favorites: action.favorites
+                }
             }
         }
         default: throw new Error ('Reducer/dispatch error')

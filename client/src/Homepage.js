@@ -20,8 +20,7 @@ export const HomePage = () => {
                 <div>1.5M Annual Visitors</div>
                 <div>EST. 1879</div>
             </StatsContainer>
-            <Line/>
-            
+            <Line/>   
             </Content>
         </FlexContainer>
         </>
@@ -93,7 +92,7 @@ margin: -130px 0 0 0;
 `
 const HeadingTextLarge = styled.h1`
 filter: grayscale(100%);
-background-image: url(https://www.artic.edu/iiif/2/1adf2696-8489-499b-cad2-821d7fde4b33/full/843,/0/default.jpg);
+background-image: url(https://www.artic.edu/iiif/2/b272df73-a965-ac37-4172-be4e99483637/full/843,/0/default.jpg);
 -webkit-text-fill-color: transparent;
 -webkit-background-clip: text;
 -webkit-text-stroke: 1px #000;

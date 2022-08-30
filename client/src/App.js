@@ -50,7 +50,7 @@ const App = () => {
 const Container = styled.div`
 display: flex;
 flex-direction: column;
-height: 99vh;
+height: 100%;
 `
 
 export default App;
