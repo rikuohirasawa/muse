@@ -19,7 +19,9 @@ border-top: 1px solid #E3E2E2;;
 justify-content: center;
 align-items: center;
 gap: 1rem;
-padding-top: 8px;`
+padding-top: 8px;
+margin-top: auto;
+`
 
 const IconLinks = styled.div`
 display: flex;

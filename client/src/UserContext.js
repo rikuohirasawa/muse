@@ -4,7 +4,9 @@ export const UserContext = createContext(null);
 
 const initialState = {
     profileSetup: false,
-    userInfo: null
+    userInfo: {
+        profileSetup: false,
+    }
 };
 
 const reducer = (state, action) => {

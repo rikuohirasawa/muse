@@ -1,4 +1,7 @@
+import styled from 'styled-components';
 import { GlobalStyle } from './GlobalStyles';
+import { Header } from './Header';
+import { Footer } from './Footer';
 import { HomePage } from './Homepage';
 import { ViewSampleArt } from './ViewSampleArt';
 import { ArtworkDetails } from './ArtworkDetails';
@@ -23,6 +26,8 @@ const App = () => {
     <>
     <BrowserRouter>
       <GlobalStyle/>
+      <Container>
+      <Header/>
       <Routes>
         <Route exact path='/' element={<HomePage/>}/>
         <Route exact path='/muse' element={<ViewSampleArt/>}/>
@@ -33,10 +38,19 @@ const App = () => {
         <Route exact path='/collection/:search' element={<SearchCollection/>}/>
         <Route exact path='/profile' element={<Profile/>}/>
       </Routes>
+      <Footer/>
+      </Container>
     {/* <img src='https://www.artic.edu/iiif/2/1adf2696-8489-499b-cad2-821d7fde4b33/full/843,/0/default.jpg'/> */}
     </BrowserRouter>
     </> 
   );
 }
+
+// container to make footer stick to the bottom of page
+const Container = styled.div`
+display: flex;
+flex-direction: column;
+height: 99vh;
+`
 
 export default App;

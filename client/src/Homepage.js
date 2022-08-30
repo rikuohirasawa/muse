@@ -1,8 +1,6 @@
 import styled from 'styled-components'
 import { Line } from './GlobalStyles';
 import { SideBar } from './SideBar';
-import { Header } from './Header';
-import { Footer } from './Footer';
 import { useEffect } from 'react';
 
 export const HomePage = () => {
@@ -11,7 +9,6 @@ export const HomePage = () => {
         <FlexContainer>
             <SideBar/>
             <Content>
-            <Header/>
             <TextWrapper>
                 <HeadingTextSmall>Art Institute of</HeadingTextSmall>
                 <BgContainer><HeadingTextLarge>Chicago</HeadingTextLarge></BgContainer>
@@ -27,7 +24,6 @@ export const HomePage = () => {
             
             </Content>
         </FlexContainer>
-        <Footer/>
         </>
 
     )
