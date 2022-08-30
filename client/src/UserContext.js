@@ -7,6 +7,7 @@ const initialState = {
     profileSetup: false,
     userInfo: {
         profileSetup: false,
+        favorites: []
     }
 };
 

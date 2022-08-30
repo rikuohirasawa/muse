@@ -13,7 +13,8 @@ export const GlobalStyle = createGlobalStyle`
 
 export const Line = styled.div`
     width: 100%;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    border-bottom: 1px solid #E3E2E2;
+    /* rgba(255, 255, 255, 0.3); */
     margin: 4px 0;`
 
 export const LinkPath = styled(Link)`

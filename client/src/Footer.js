@@ -15,7 +15,7 @@ export const Footer = () => {
 
 const Wrapper = styled.div`
 display: flex;
-border-top: 1px solid #E3E2E2;;
+border-top: 1px solid #E3E2E2;
 justify-content: center;
 align-items: center;
 gap: 1rem;

@@ -1,13 +1,11 @@
 import styled from 'styled-components'
 import { Line } from './GlobalStyles';
-import { SideBar } from './SideBar';
 import { useEffect } from 'react';
 
 export const HomePage = () => {
     return (
         <>
         <FlexContainer>
-            <SideBar/>
             <Content>
             <TextWrapper>
                 <HeadingTextSmall>Art Institute of</HeadingTextSmall>

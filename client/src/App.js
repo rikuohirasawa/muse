@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { GlobalStyle } from './GlobalStyles';
 import { Header } from './Header';
 import { Footer } from './Footer';
+import { SideBar } from './SideBar';
 import { HomePage } from './Homepage';
 import { ViewSampleArt } from './ViewSampleArt';
 import { ArtworkDetails } from './ArtworkDetails';
@@ -28,6 +29,7 @@ const App = () => {
       <GlobalStyle/>
       <Container>
       <Header/>
+      <SideBar/>
       <Routes>
         <Route exact path='/' element={<HomePage/>}/>
         <Route exact path='/muse' element={<ViewSampleArt/>}/>
