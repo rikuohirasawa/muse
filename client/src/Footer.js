@@ -21,6 +21,7 @@ align-items: center;
 gap: 1rem;
 padding-top: 8px;
 margin-top: auto;
+border-left: 1px solid #E3E2E2;
 `
 
 const IconLinks = styled.div`

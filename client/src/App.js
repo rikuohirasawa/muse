@@ -27,32 +27,42 @@ const App = () => {
     <>
     <BrowserRouter>
       <GlobalStyle/>
-      <Container>
       <Header/>
-      <SideBar/>
-      <Routes>
-        <Route exact path='/' element={<HomePage/>}/>
-        <Route exact path='/muse' element={<ViewSampleArt/>}/>
-        <Route exact path='/artwork/:id' element={<ArtworkDetails/>}/>
-        <Route exact path='/artist/:name' element={<ArtistDetails/>}/>
-        <Route exact path='/login' element={<SignInPage/>}/>
-        <Route exact path='/about' element={<About/>}/>
-        <Route exact path='/collection/:search' element={<SearchCollection/>}/>
-        <Route exact path='/profile' element={<Profile/>}/>
-      </Routes>
-      <Footer/>
-      </Container>
+      <FlexRow>
+        <SideBar/>
+        <FlexColumn>
+          <Routes>
+            <Route exact path='/' element={<HomePage/>}/>
+            <Route exact path='/muse' element={<ViewSampleArt/>}/>
+            <Route exact path='/artwork/:id' element={<ArtworkDetails/>}/>
+            <Route exact path='/artist/:name' element={<ArtistDetails/>}/>
+            <Route exact path='/login' element={<SignInPage/>}/>
+            <Route exact path='/about' element={<About/>}/>
+            <Route exact path='/collection/:search' element={<SearchCollection/>}/>
+            <Route exact path='/profile' element={<Profile/>}/>
+          </Routes>
+          <Footer/>
+        </FlexColumn>
+      </FlexRow>
     {/* <img src='https://www.artic.edu/iiif/2/1adf2696-8489-499b-cad2-821d7fde4b33/full/843,/0/default.jpg'/> */}
     </BrowserRouter>
     </> 
   );
 }
 
+
+// container to make sidebar stick to the side of page
+
+const FlexRow = styled.div`
+  display: flex;
+  `
 // container to make footer stick to the bottom of page
-const Container = styled.div`
+const FlexColumn = styled.div`
 display: flex;
 flex-direction: column;
+width: 100%;
 height: 100%;
+/* border: 1px solid red; */
 `
 
 export default App;
