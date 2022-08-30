@@ -37,7 +37,7 @@ export const ViewSampleArt = () => {
                                     <div>Unknown</div>
                                     :
                                     element.artist_titles.map(e=>{
-                                    return <Link to={`/artist/${e}`} style={{color: '#fff'}}>{e}</Link>
+                                    return <Link to={`/artist/${e}`} style={{color: 'inherit'}}>{e}</Link>
                                 })}
                                     <Line/>
                                     <div>{element.date_display}</div>

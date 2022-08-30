@@ -44,7 +44,7 @@ export const SearchCollection = () => {
         }).catch(err => {
             console.log(err)
         })
-    }, [renderPage])
+    }, [renderPage, searchTarget])
 
     if (searchInfo) {
         return (
