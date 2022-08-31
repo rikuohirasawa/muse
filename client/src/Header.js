@@ -37,6 +37,7 @@ export const Header = () => {
     }, [isAuthenticated])
 
     const navigate = useNavigate();
+    
     const searchSubmit = (e) => {
         e.preventDefault();
         const searchForm = new FormData(document.forms.searchBar);
