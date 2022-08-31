@@ -67,7 +67,7 @@ export const ArtistDetails = () => {
 const Content = styled.div`
     display: grid;
 
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     grid-auto-flow: dense;
     align-items: flex-start;
     height: auto;

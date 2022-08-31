@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import { FormControlLabel, Checkbox, FormGroup, Typography, Slider, Input } from '@mui/material'
 import {BsFilter} from 'react-icons/bs'
 import {GrPowerReset} from 'react-icons/gr'
-import {AiOutlineSearch} from 'react-icons/ai';
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
@@ -22,13 +21,16 @@ export const SideBar = () => {
             fontFamily: 'inherit'
     }, 
         input: {
-            border: '1px solid red',
+            padding: '2px 6px',
             textDecoration: 'none',
-            fontFamily: 'inherit'
+            fontFamily: 'inherit',
+            border: '1px solid #E3E2E2'
         },
         inputLabel: {
             fontWeight: '700',
-            fontFamily: 'inherit'
+            fontFamily: 'inherit',
+            margin: '8px 0'
+
         }
     }
 
@@ -38,13 +40,17 @@ export const SideBar = () => {
         const form = new FormData(document.forms.filterForm);
         let valueArray = [];
         for (const value of form.values()){
-            console.log(value)
-            valueArray.push(value)
+            // add condition here because there was an empty string being pushed to valueArray otherwise
+            if (value) {
+                valueArray.push(value)
+            } 
         }
         if (yearFilter) {
             valueArray.push(yearFilter)
+            console.log(valueArray)
         }
-        if (valueArray.length > 0) {
+        if (valueArray.join('')) {
+            console.log(valueArray.join(''))
             setFilterAlert(false);
             navigate(`/collection/${valueArray.join(', ')}`);
         } else {
@@ -80,12 +86,13 @@ export const SideBar = () => {
                 />
                 {/* kind of messy looking logic here for rendering, but as 0 returns falsy, yearFilter will not render at initial state */}
                 <div className='year-filter'>{yearFilter ? yearFilter : 0}<YearResetBtn onClick={()=>{setYearFilter(0)}}><GrPowerReset/></YearResetBtn></div>
+                
                 <FormControlLabel control={<Input name='customSearch' style={styles.input} disableUnderline='true' placeholder='e.g. Cats' size='small'/>} label={<Typography style={styles.inputLabel}>Custom Search</Typography>} labelPlacement='top'/>
-
                 <FilterButton type='submit'><BsFilter/> Filter</FilterButton>
             </SearchSelect>
             </FilterForm>
         </FlexColumn>
+
     )
 }
 
@@ -94,15 +101,18 @@ const FlexColumn = styled.div`
     flex-direction: column;
     border-right: 1px solid #E3E2E2;
     height: 100vh;
+    width: 350px;
     `
 
 const FilterForm = styled.form`
+    padding: 16px 8px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100%;
     .title {
-        text-align: center;
         font-weight: 700;
+        width: 100%;
 }
     .year-filter {
         display: flex;
@@ -128,9 +138,7 @@ const YearResetBtn = styled.button`
     `
 
 const SearchSelect = styled(FormGroup)`
-font-family: inherit;
-
-
+text-align: center;
 `
 
 const Check = styled(Checkbox)`
@@ -159,6 +167,8 @@ const SearchButton = styled.button`
     `
 
 const FilterButton = styled.button`
+    margin: 16px 0; 
+    padding: 4px 10px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -168,10 +178,10 @@ const FilterButton = styled.button`
     font-size: inherit;
     gap: 8px;
     cursor: pointer;
-    border: 1px solid red;
-    /* transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+    
     &:hover,
     &:focus {
-    transform: scale(1.01)
-    }; */
+    transform: scale(1.05)
+    };
 `
