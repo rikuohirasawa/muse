@@ -41,7 +41,33 @@ const updateUserFavorites = async (req, res) => {
 const deleteUserFavorite = async (req, res) => {
     const client = new MongoClient(MONGO_URI, options);
     const db = client.db('muse');
+    try {
+        await client.connect();
+        const deleteFavorite = await db.collection('users').findOneAndUpdate(
+            { email: req.body.email },
+            { $pull: {favorites: req.body.artworkId}},
+            // return document after to get the updated value (by default return original)
+            {returnDocument: 'after'}
+        )
+        console.log(deleteFavorite)
+        if (deleteFavorite) {
+            res.status(200).json({
+                status: 200,
+                data: deleteFavorite
+            })
+        } else {
+            res.status(404).json({
+                status: 404,
+                message: 'Error deleting user favorite'
+            })
+        }
+    } catch(err) {
+        res.status(500).json({
+            status: 500,
+            message: err.message
+        })
+    };
 
 }
 
-module.exports = { updateUserFavorites }
+module.exports = { updateUserFavorites, deleteUserFavorite }

@@ -9,7 +9,10 @@ const {
     updateUserProfile
     } = require('./handlers/userHandlers');
 
-const { updateUserFavorites } = require('./handlers/userActionHandlers')
+const { 
+    updateUserFavorites,
+    deleteUserFavorite
+    } = require('./handlers/userActionHandlers')
 
 express()
 .use(morgan("tiny"))
@@ -23,6 +26,7 @@ express()
 
     .patch('/user/update-user', updateUserProfile)
     .patch('/user/update-favorites', updateUserFavorites)
+    .patch('/user/delete-favorite', deleteUserFavorite)
 
     .listen(8000, ()=>{
         console.log('server launched on 8000')

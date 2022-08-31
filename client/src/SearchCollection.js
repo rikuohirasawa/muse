@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import { useEffect, useState } from "react"
 import { useParams, useNavigate, Link } from "react-router-dom"
-
+import { LikeButton } from "./LikeButton"
 import { Line, LinkPath } from "./GlobalStyles"
 
 
@@ -55,15 +55,23 @@ export const SearchCollection = () => {
                 {searchInfo.map((element, index)=>{
                         return (
                             <ArtPieceContainer >
+                                <ImageContainer>
+                                <LikeButton 
+                                style={{margin: '0 10px -30px 0',
+                                zIndex: '2'}}
+                                id={element.id} 
+                                />
                                 <Image 
                                 src={`https://www.artic.edu/iiif/2/${element.image_id}/full/843,/0/default.jpg`}
                                 onClick={()=>{navigate(`/artwork/${element.id}`)}}/>
+                                </ImageContainer>
+                             
                                 <div>{element.title} ({element.date_display})</div>
                                 <LinkPath to={`/artist/${element.artist_title}`}>{element.artist_title}</LinkPath>
                                 <div>{element.category_titles.map(e=>{
                                     return <LinkPath to={`/collection/${e}`} onClick={()=>onClickCategory()} className='categories'> {e} </LinkPath>
                                 })}</div>
-                                <Line/>
+                                {/* <Line/> */}
                             </ArtPieceContainer>             
                         )
                     })}
@@ -94,7 +102,6 @@ flex-direction: column;
 align-items: center;
 text-align: center;
 gap: 8px;
-border: 1px solid purple;
 margin: 0;
 
 .categories {
@@ -103,6 +110,12 @@ margin: 0;
         margin-right: 5px;
     }
 }`
+
+const ImageContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+`
 
 const Image = styled.img`
 width: 100%;

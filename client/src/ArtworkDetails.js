@@ -88,6 +88,12 @@ export const ArtworkDetails = () => {
                     <ApiLink href={artworkDetails.api_link}>API Link</ApiLink>
                 </InformationContainer>
                 <ImageContainer>
+                {userInfo.profileSetup && 
+                <LikeButton 
+                style={{margin: '0 10px -30px 0',
+                    zIndex: '2'}}
+                id={artworkDetails.id} 
+                />}
                     <Image 
                     src={`https://www.artic.edu/iiif/2/${artworkDetails.image_id}/full/843,/0/default.jpg`}
                     alt={artworkDetails.thumbnail && artworkDetails.thumbnail.alt_text}/>
@@ -127,8 +133,7 @@ export const ArtworkDetails = () => {
                     </>
                     }
                 </ReadMoreContainer>  
-                {userInfo.profileSetup && 
-                <LikeButton id={artworkDetails.id} email={userInfo.email}/>}
+
             </Content>
         )
     }
@@ -142,6 +147,9 @@ const Content = styled.div`
     gap: 2rem;
 `
 const ImageContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
 `
 
 const ReadMoreContainer = styled.div`
