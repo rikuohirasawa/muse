@@ -5,7 +5,9 @@ import {IoIosArrowDown, IoIosArrowUp} from 'react-icons/io'
 import {Line, LinkPath} from './GlobalStyles'
 import { useContext } from "react"
 import { UserContext } from "./UserContext"
+import { LikeButton } from "./LikeButton"
 import { addToFavorites } from "./utils"
+import {BsSuitHeart, BsSuitHeartFill} from 'react-icons/bs'
 
 
 
@@ -53,7 +55,7 @@ export const ArtworkDetails = () => {
     }, []);
     
     
-    if (artworkDetails) {
+    if (artworkDetails && userInfo) {
         return (
             <Content>
                 <InformationContainer>
@@ -125,13 +127,8 @@ export const ArtworkDetails = () => {
                     </>
                     }
                 </ReadMoreContainer>  
-                <button onClick={()=>{
-                    if (!userInfo.favorites.includes(artworkDetails.id)) {
-                        addToFavorites(userInfo.email, artworkDetails.id, dispatch)
-                    } else {
-                        console.log('already favorited')
-                    }
-                }}>add</button>    
+                {userInfo.profileSetup && 
+                <LikeButton id={artworkDetails.id} email={userInfo.email}/>}
             </Content>
         )
     }
@@ -178,5 +175,7 @@ const InformationContainer = styled.div`
 const ApiLink = styled.a`
     color: inherit;
 `
+
+
 
 

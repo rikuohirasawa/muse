@@ -38,4 +38,10 @@ const updateUserFavorites = async (req, res) => {
     };
 };
 
+const deleteUserFavorite = async (req, res) => {
+    const client = new MongoClient(MONGO_URI, options);
+    const db = client.db('muse');
+
+}
+
 module.exports = { updateUserFavorites }

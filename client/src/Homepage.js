@@ -10,8 +10,7 @@ export const HomePage = () => {
             <TextWrapper>
                 <HeadingTextSmall>Art Institute of</HeadingTextSmall>
                 <BgContainer><HeadingTextLarge>Chicago</HeadingTextLarge></BgContainer>
-            </TextWrapper>
-            
+            </TextWrapper>        
             <Line/>
             <StatsContainer>
                 <div>300K Artworks</div>
