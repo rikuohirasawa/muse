@@ -1,11 +1,14 @@
 import styled from 'styled-components'
 import { Line } from './GlobalStyles';
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export const HomePage = () => {
 
   // const randomArtGenerator = [35772, 126289, 94020, 212427, 190300, 81539, 197069, 61939, 25363, 10983, 14977, 145149, 3452, 62345, 6565, 2582]
   // const randomIndex = Math.floor(Math.random)
+
+  const navigate = useNavigate();
   return (
         <>
 
@@ -17,7 +20,7 @@ export const HomePage = () => {
                     <ImageSmall src='https://www.artic.edu/iiif/2/f95a0a70-90c5-2806-2a66-68f27f8c0735/full/843,/0/default.jpg'/>
                     <div>
                       <div>Browse one of the world's largest collections...</div>
-                      <DiscoverButton>Show me something</DiscoverButton>
+                      <DiscoverButton onClick={()=>{navigate('/muse')}}>Show me something</DiscoverButton>
                     </div>
                   </div>
               </TextWrapper>  
@@ -28,9 +31,7 @@ export const HomePage = () => {
                 <div>1.5M Annual Visitors</div>
                 <div>EST. 1879</div>
             </StatsContainer>
-
         </>
-
     )
 
 }
@@ -49,7 +50,6 @@ const ImageSmall = styled.img`
   z-index: -1;
 `
 const Content = styled.div`
-
     height: 100%;
     display: flex;
     justify-content: space-around;
@@ -62,12 +62,11 @@ flex-direction: column;
 align-items: center;
 
 .flex-wrapper {
+  margin-top: -24px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 105%;
-
-
 }
 
 @keyframes animate {

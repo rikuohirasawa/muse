@@ -36,6 +36,9 @@ const Button = styled.button`
     align-items: center;
     cursor: pointer;
     border: none;
+    /* width: 28px;
+    height: 28px;
+    border-radius: 50%; */
 
     /* @keyframes fadein {
     from {

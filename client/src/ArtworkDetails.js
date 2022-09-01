@@ -90,49 +90,56 @@ export const ArtworkDetails = () => {
                 <ImageContainer>
                 {userInfo.profileSetup && 
                 <LikeButton 
-                style={{margin: '0 10px -30px 0',
+                style={{margin: '0 10px -35px 0',
                     zIndex: '2'}}
                 id={artworkDetails.id} 
                 />}
                     <Image 
                     src={`https://www.artic.edu/iiif/2/${artworkDetails.image_id}/full/843,/0/default.jpg`}
                     alt={artworkDetails.thumbnail && artworkDetails.thumbnail.alt_text}/>
-
                 </ImageContainer>
+                {artworkDetails.provenance_text || artworkDetails.exhibition_history ?
                 <ReadMoreContainer>
-                    {artworkDetails.provenance_text && 
-                    <>
-                      <div className="provenance" onClick={()=>{toggleProvDisplay()}}>
-                        Provenance (History of Ownership)
-                        {provDisplay ?
+                {artworkDetails.provenance_text && 
+                <>
+                  <div className="provenance" onClick={()=>{toggleProvDisplay()}}>
+                    Provenance (History of Ownership)
+                    {provDisplay ?
+                    <IoIosArrowUp/> 
+                    : 
+                    <IoIosArrowDown/>
+                    }
+                    </div>
+                  {provDisplay && 
+                  <div className='provenance-text'>{artworkDetails.provenance_text}</div>
+                  }   
+                  <Line/>
+                </>
+                } {artworkDetails.exhibition_history && 
+                <>
+                    <div className="exhibition-history" onClick={()=>{toggleExhibitionDisplay()}}>
+                        Exhibition History
+                        {exhibitionDisplay ?
                         <IoIosArrowUp/> 
                         : 
                         <IoIosArrowDown/>
                         }
-                        </div>
-                      {provDisplay && 
-                      <div className='provenance-text'>{artworkDetails.provenance_text}</div>
-                      }   
-                      <Line/>
-                    </>
-                    } {artworkDetails.exhibition_history && 
+                    </div>
+                    {exhibitionDisplay && 
                     <>
-                        <div className="exhibition-history" onClick={()=>{toggleExhibitionDisplay()}}>
-                            Exhibition History
-                            {exhibitionDisplay ?
-                            <IoIosArrowUp/> 
-                            : 
-                            <IoIosArrowDown/>
-                            }
-                        </div>
-                        {exhibitionDisplay && 
-                        <>
-                        <div className="exhibition-history-text">{artworkDetails.exhibition_history}</div>
-                        </>
-                        }
+                    <div className="exhibition-history-text">{artworkDetails.exhibition_history}</div>
                     </>
                     }
-                </ReadMoreContainer>  
+                </>
+                }
+            </ReadMoreContainer>  
+                : 
+                // conditionally return empty fragment here, as when I implemented the condition using && operator it broke the code,
+                // I suspect because of the || operator immediately preceding it?
+                <></>
+            }
+
+                
 
             </Content>
         )
@@ -153,9 +160,7 @@ const ImageContainer = styled.div`
 `
 
 const ReadMoreContainer = styled.div`
-/* border: 1px solid red; */
 width: 400px;
-
 
 .provenance,
 .exhibition-history {

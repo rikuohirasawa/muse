@@ -80,7 +80,7 @@ justify-content: center; */
     flex-direction: 'column';
     justify-content: 'center';
     align-items: 'center'; */
-    height: '100%';
+
 }
 
 .swiper-container {
@@ -96,15 +96,16 @@ justify-content: center; */
 const Content = styled.div`
     display: flex;
     align-items: center;
-    justify-content: center;
-    height: 100%;
-    margin: auto;
+    justify-content: space-evenly;
+
+
+    /* margin: auto; */
+
 
 `
 
 const Image = styled.img`
     max-height: 80vh;
-    
     cursor: pointer;
 `
 
@@ -115,7 +116,6 @@ const InformationContainer = styled.div`
     flex-direction: column;
     gap: 6px;`
 
-const div = styled.div``
 
 const Line = styled.div`
     width: 100%;
