@@ -2,11 +2,14 @@ import styled from 'styled-components'
 import { FormControlLabel, Checkbox, FormGroup, Typography, Slider, Input } from '@mui/material'
 import {BsFilter} from 'react-icons/bs'
 import {GrPowerReset} from 'react-icons/gr'
+import {IoIosArrowBack, IoIosArrowForward} from 'react-icons/io'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 export const SideBar = () => {
+    const [sidebarDisplay, setSidebarDisplay] = useState(false);
     const [yearFilter, setYearFilter] = useState(0);
+    
     const navigate = useNavigate();
     const styles = {
         color: {
@@ -26,6 +29,26 @@ export const SideBar = () => {
             fontWeight: '700',
             fontFamily: 'inherit',
             margin: '8px 0'
+        },
+        showSidebar: {
+            width: '350px'
+        },
+        hideSidebar: {
+            width: '0px'
+        },
+        buttonHide: {
+            width: '35px'
+        },
+        buttonShow: {
+            width: '50px',
+        },
+        hideForm: {
+            opacity: '0',
+            zIndex: '-1'
+        },
+        displayForm: {
+            opacity: '1',
+            zIndex: '1'
         }
     }
 
@@ -49,9 +72,10 @@ export const SideBar = () => {
     }
 
     return (
-        <FlexColumn>
-            <FilterForm id='filterForm' onSubmit={(e)=>{submitFilter(e)}}>
-            <SearchSelect >
+        <Wrapper>
+        <SideBarToggle style={sidebarDisplay ? styles.showSidebar : styles.hideSidebar}>
+            <FilterForm id='filterForm' onSubmit={(e)=>{submitFilter(e)}} style={sidebarDisplay ? styles.displayForm : styles.hideForm}>
+            <SearchSelect>
                 <div className='title'>Categories</div>
                 <FormControlLabel control={<Check name='category' value='Modern Art' style={styles.color}/>} label={<Typography style={styles.font}>Modern Art</Typography>}/>
                 <FormControlLabel control={<Check name='category' value='Prints and Drawings' style={styles.color}/>} label={<Typography style={styles.font}>Prints and Drawings</Typography>}/>
@@ -81,21 +105,65 @@ export const SideBar = () => {
                 <FilterButton type='submit'><BsFilter/> Filter</FilterButton>
             </SearchSelect>
             </FilterForm>
-        </FlexColumn>
-
+        </SideBarToggle>
+        <ToggleDisplay 
+        onClick={()=>{
+            sidebarDisplay ?
+            setSidebarDisplay(false)
+            :
+            setSidebarDisplay(true)
+        }}
+        style={
+            sidebarDisplay ?
+            styles.buttonHide
+            :
+            styles.buttonShow
+            }>
+            {sidebarDisplay ?
+            <>
+            <IoIosArrowBack/>
+            </>
+            : 
+            <>
+            <IoIosArrowForward/>
+            <IoIosArrowForward/>
+            </>}
+        </ToggleDisplay>
+        </Wrapper>
     )
 }
 
-const FlexColumn = styled.div`
+const Wrapper = styled.div`
     display: flex;
-    flex-direction: column;
     border-right: 1px solid #E3E2E2;
+`
+
+const SideBarToggle = styled.div`
+    transition: all 0.5s ease-in-out;
+    min-height: 100vh;
+    border-right: 1px solid #E3E2E2;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    transition: all 0.5s ease-in-out;
+
+    justify-content: space-between;
+
+`
+
+const ToggleDisplay = styled.button`
     height: 100vh;
-    width: 350px;
-    `
+    transition: all 0.5s ease-in-out;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+    background: inherit;
+
+`
 
 const FilterForm = styled.form`
-    padding: 16px 8px;
+    transition: all 0.2s ease-in-out;
+    padding: 16px 0px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -128,7 +196,7 @@ const YearResetBtn = styled.button`
     `
 
 const SearchSelect = styled(FormGroup)`
-text-align: center;
+    text-align: center;
 `
 
 const Check = styled(Checkbox)`
@@ -153,3 +221,5 @@ const FilterButton = styled.button`
     transform: scale(1.05)
     };
 `
+
+
