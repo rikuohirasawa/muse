@@ -15,13 +15,15 @@ export const ViewSampleArt = () => {
     }
     
     useEffect(()=>{
+        console.log('test')
         fetch('/api/sample-art')
             .then(res=>res.json())
             .then((data)=>{
-                console.log(data.data)
+                console.log(data)
                 setSampleArt(data.data)
-            })
+            }).catch(err =>{ console.log (err.message)})
     }, []);
+    
     if (sampleArt.length > 0) {
         return (
             <Container>
@@ -60,7 +62,9 @@ export const ViewSampleArt = () => {
                             </Swiper>
             </Container>
                     
-            )}
+            )} else {
+                return <div>loading</div>
+            }
                             }
 
 

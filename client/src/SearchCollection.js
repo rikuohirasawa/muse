@@ -14,7 +14,6 @@ export const SearchCollection = () => {
 
     const onClickCategory = () => {
         setRenderPage(!renderPage);
-        setSearchInfo(null);
     }
 
     useEffect(()=>{

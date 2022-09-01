@@ -1,16 +1,12 @@
 import styled from 'styled-components'
-// import Checkbox from '@mui/material/Checkbox'
 import { FormControlLabel, Checkbox, FormGroup, Typography, Slider, Input } from '@mui/material'
 import {BsFilter} from 'react-icons/bs'
 import {GrPowerReset} from 'react-icons/gr'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-
 export const SideBar = () => {
-
-    const [yearFilter, setYearFilter] = useState(null);
-    const [filterAlert, setFilterAlert] = useState(0);
+    const [yearFilter, setYearFilter] = useState(0);
     const navigate = useNavigate();
     const styles = {
         color: {
@@ -30,7 +26,6 @@ export const SideBar = () => {
             fontWeight: '700',
             fontFamily: 'inherit',
             margin: '8px 0'
-
         }
     }
 
@@ -47,17 +42,10 @@ export const SideBar = () => {
         }
         if (yearFilter) {
             valueArray.push(yearFilter)
-            console.log(valueArray)
         }
         if (valueArray.join('')) {
-            console.log(valueArray.join(''))
-            setFilterAlert(false);
             navigate(`/collection/${valueArray.join(', ')}`);
-        } else {
-            setFilterAlert(true);
         }
-        console.log(valueArray.join(','))
-        // console.log(form.getAll('category'))
     }
 
     return (
@@ -77,17 +65,19 @@ export const SideBar = () => {
                 <FormControlLabel control={<Check name='artist' value='Grant Wood' style={styles.color}/>} label={<Typography style={styles.font}>Grant Wood</Typography>}/>
                 <div className='title'>Year</div>
                 <Slider 
-                aria-label='Select year'
-                onChange={(e)=>{setYearFilter(e.target.value)}}
-                size='small'
-                style={styles.color}
-                min={1000}
-                max={2022}
-                />
-                {/* kind of messy looking logic here for rendering, but as 0 returns falsy, yearFilter will not render at initial state */}
-                <div className='year-filter'>{yearFilter ? yearFilter : 0}<YearResetBtn onClick={()=>{setYearFilter(0)}}><GrPowerReset/></YearResetBtn></div>
-                
-                <FormControlLabel control={<Input name='customSearch' style={styles.input} disableUnderline='true' placeholder='e.g. Cats' size='small'/>} label={<Typography style={styles.inputLabel}>Custom Search</Typography>} labelPlacement='top'/>
+                    aria-label='Select year'
+                    onChange={(e)=>{setYearFilter(e.target.value)}}
+                    size='small'
+                    style={styles.color}
+                    min={1000}
+                    max={2022}
+                    value={yearFilter}
+                    />
+                    <div className='year-filter'>{yearFilter}<YearResetBtn onClick={(e)=>{
+                        e.preventDefault();
+                        setYearFilter(0);
+                        }}><GrPowerReset/></YearResetBtn></div>
+                <FormControlLabel control={<Input name='customSearch' style={styles.input} disableUnderline={true} placeholder='e.g. Cats' size='small'/>} label={<Typography style={styles.inputLabel}>Custom Search</Typography>} labelPlacement='top'/>
                 <FilterButton type='submit'><BsFilter/> Filter</FilterButton>
             </SearchSelect>
             </FilterForm>
@@ -143,28 +133,6 @@ text-align: center;
 
 const Check = styled(Checkbox)`
 `
-
-const CustomSearch = styled.form`
-    display: flex;`
-
-const CustomInput = styled.input`
-    font-family: inherit;
-    &:focus {
-        outline: none;
-    }`
-
-const SearchButton = styled.button`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: inherit;
-    background: inherit;
-    border: none;
-    font-size: 1.5rem;
-
-
-    cursor: pointer;
-    `
 
 const FilterButton = styled.button`
     margin: 16px 0; 
