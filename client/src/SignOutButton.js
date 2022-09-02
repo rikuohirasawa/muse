@@ -6,7 +6,7 @@ export const SignOutButton = () => {
 
   return (
     <LoginButton 
-    onClick={() => logout({ returnTo: window.location.origin })}>
+    onClick={() => logout({ returnTo: 'http://localhost:3000/home'})}>
       Sign Out
     </LoginButton>
   );

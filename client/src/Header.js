@@ -10,8 +10,11 @@ import { useEffect, useContext } from 'react';
 
 
 import { UserContext } from './UserContext';
+import { useLocation } from 'react-router-dom';
 
 export const Header = () => {
+
+    const location = useLocation();
 
 
     const { user, isAuthenticated, isLoading } = useAuth0();
@@ -48,10 +51,10 @@ export const Header = () => {
         navigate(`/collection/${input}`)
     };
 
-
+    if (location.pathname !== '/') {
     return (
         <Wrapper>
-            <LogoText to='/'>Muse</LogoText>
+            <LogoText to='/home'>Muse</LogoText>
             <Content>
                 {isAuthenticated &&
                 <>
@@ -71,6 +74,7 @@ export const Header = () => {
             </Content>
         </Wrapper>
     )
+}
 }
 
 const Wrapper = styled.div`

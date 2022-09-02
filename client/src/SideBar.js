@@ -4,13 +4,14 @@ import {BsFilter} from 'react-icons/bs'
 import {GrPowerReset} from 'react-icons/gr'
 import {IoIosArrowBack, IoIosArrowForward} from 'react-icons/io'
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { useAuth0 } from "@auth0/auth0-react";
 
 export const SideBar = () => {
     const [sidebarDisplay, setSidebarDisplay] = useState(false);
     const [yearFilter, setYearFilter] = useState(0);
     const { isAuthenticated } = useAuth0();
+    const location = useLocation();
     
     const navigate = useNavigate();
     const styles = {
@@ -73,6 +74,7 @@ export const SideBar = () => {
         }
     }
 
+    if (location.pathname !== '/') {
     return (
         <Wrapper>
         <SideBarToggle style={sidebarDisplay ? styles.showSidebar : styles.hideSidebar}>
@@ -138,6 +140,7 @@ export const SideBar = () => {
         </ToggleDisplay>
         </Wrapper>
     )
+}
 }
 
 const Wrapper = styled.div`

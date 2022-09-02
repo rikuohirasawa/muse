@@ -10,6 +10,7 @@ import { ArtistDetails } from './ArtistDetails';
 import { About } from './About';
 import { SignInPage } from './SignInPage';
 import { Profile } from './Profile';
+import { WelcomeScreen } from './WelcomeScreen';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useEffect } from 'react';
@@ -32,7 +33,8 @@ const App = () => {
         <SideBar/>
         <FlexColumn>
           <Routes>
-            <Route exact path='/' element={<HomePage/>}/>
+            <Route exact path='/' element={<WelcomeScreen/>}/>
+            <Route exact path='/home' element={<HomePage/>}/>
             <Route exact path='/muse' element={<ViewSampleArt/>}/>
             <Route exact path='/artwork/:id' element={<ArtworkDetails/>}/>
             <Route exact path='/artist/:name' element={<ArtistDetails/>}/>
@@ -55,7 +57,8 @@ const App = () => {
 
 const FlexRow = styled.div`
   display: flex;
-
+  background: transparent;
+  z-index: -1;
   `
 // container to make footer stick to the bottom of page
 const FlexColumn = styled.div`

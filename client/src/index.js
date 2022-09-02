@@ -11,7 +11,8 @@ root.render(
     <Auth0Provider
     domain='dev-2i1c-guh.us.auth0.com'
     clientId='5rjngEGwu6pjK6m2nq6uK1biMf6RcZuy'
-    redirectUri='http://localhost:3000/'>
+    redirectUri='http://localhost:3000/home'
+    >
       <UserContextProvider>
       <ArtContextProvider>
         <App />

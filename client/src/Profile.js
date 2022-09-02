@@ -32,8 +32,13 @@ export const Profile = () => {
             <>
             <FlexContainer>
             <Avatar src={userInfo.avatarSrc}/>
+            <div>
             <h1>{userInfo.name}</h1>
+            <div className='user-bio'>{userInfo.bio}</div>
+            </div>
+
             </FlexContainer>
+
             <Line/>
             <Title>Your Collection</Title>
             {userCollection && userInfo.favorites.length > 0 ? 
@@ -76,6 +81,12 @@ const FlexContainer = styled.div`
     width: 95%;
     margin: 0 auto;
     padding: 1.5rem 0;
+
+
+    .user-bio {
+        max-width: 400px;
+
+    }
 `
 const Avatar = styled.img`
     width: 140px;

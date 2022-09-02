@@ -1,7 +1,9 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import {AiOutlineGithub, AiOutlineLinkedin} from 'react-icons/ai'
 export const Footer = () => {
+    const location = useLocation();
+    if (location.pathname !== '/') {
     return (
         <Wrapper>
             <ApiDoc href='https://api.artic.edu/docs/'>API Documentation</ApiDoc>
@@ -11,6 +13,7 @@ export const Footer = () => {
             </IconLinks>
         </Wrapper>
     )
+    }
 }
 
 const Wrapper = styled.div`

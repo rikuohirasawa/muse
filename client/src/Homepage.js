@@ -3,6 +3,7 @@ import { Line } from './GlobalStyles';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+
 export const HomePage = () => {
 
   // const randomArtGenerator = [35772, 126289, 94020, 212427, 190300, 81539, 197069, 61939, 25363, 10983, 14977, 145149, 3452, 62345, 6565, 2582]
