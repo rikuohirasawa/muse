@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import { useParams, useNavigate } from "react-router-dom"
 import { Line, LinkPath } from "./GlobalStyles"
 import { LikeButton } from "./LikeButton"
+import { LoadingScreen } from "./LoadingScreen"
 
 export const ArtistDetails = () => {
     const navigate = useNavigate();
@@ -34,11 +35,12 @@ export const ArtistDetails = () => {
         })
     }, [])
 
-    if (artistInfo) {
         return (
             <>
-                <h1>{artistName}</h1>
+            <Wrapper>
+            <h1>{artistName}</h1>
                 <Line/>
+                {artistInfo ?         
                 <Content>
                     {artistInfo.map((element, index)=>{
                         return (
@@ -53,6 +55,7 @@ export const ArtistDetails = () => {
                                 onClick={()=>{navigate(`/artwork/${element.id}`)}}/>
                             </ImageContainer>
                                 <div>{element.title} ({element.date_display})</div>
+                                <LinkPath to={`/artist/${element.artist_title}`}>{element.artist_title}</LinkPath>
                                 <div>{element.category_titles.map(e=>{
                                     return <LinkPath to={`/collection/${e}`} className='categories'> {e} </LinkPath>
                                 })}</div>
@@ -61,25 +64,23 @@ export const ArtistDetails = () => {
                         )
                     })}
                 </Content>
+                :
+                <LoadingScreen/>
+                }
+            </Wrapper>
             </>
-        )
-    } else {
-        return (
-            <div> LOADING </div>
         )
     }
 
-}
 
+
+const Wrapper = styled.div`
+    padding: 0 48px;
+`
 const Content = styled.div`
     display: grid;
-
+    border: 1px solid red;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-auto-flow: dense;
-    align-items: flex-start;
-    height: auto;
-    grid-column-gap: -1rem;
-    grid-row-gap: 0rem;
 
     `
 
@@ -91,8 +92,6 @@ flex-direction: column;
 align-items: center;
 text-align: center;
 gap: 8px;
-border: 1px solid red;
-
 .categories {
     :not(:last-child) {
         border-right: 1px solid rgba(255, 255, 255, 0.3);

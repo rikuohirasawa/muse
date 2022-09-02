@@ -55,14 +55,15 @@ const App = () => {
 
 const FlexRow = styled.div`
   display: flex;
+
   `
 // container to make footer stick to the bottom of page
 const FlexColumn = styled.div`
 display: flex;
 flex-direction: column;
 width: 100%;
-height: 100%;
-/* border: 1px solid red; */
+height: 100vh;
+
 `
 
 export default App;

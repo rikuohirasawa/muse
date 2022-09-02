@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import { useParams, useNavigate, Link } from "react-router-dom"
 import { LikeButton } from "./LikeButton"
 import { Line, LinkPath } from "./GlobalStyles"
+import { LoadingScreen } from "./LoadingScreen"
 
 
 export const SearchCollection = () => {
@@ -45,51 +46,54 @@ export const SearchCollection = () => {
         })
     }, [renderPage, searchTarget])
 
-    if (searchInfo) {
+
         return (
-            <>
+            <Wrapper>
                 <h1>{searchTarget.charAt(0).toUpperCase() + searchTarget.slice(1)}</h1>
                 <Line/>
+                {searchInfo ?
                 <Content>
                 {searchInfo.map((element, index)=>{
                         return (
                             <ArtPieceContainer >
                                 <ImageContainer>
                                 <LikeButton 
-                                style={{margin: '0 10px -30px 0',
+                                style={{margin: '0 10px -27px 0',
                                 zIndex: '2'}}
                                 id={element.id} 
                                 />
                                 <Image 
                                 src={`https://www.artic.edu/iiif/2/${element.image_id}/full/843,/0/default.jpg`}
                                 onClick={()=>{navigate(`/artwork/${element.id}`)}}/>
-                                </ImageContainer>
-                             
+                                </ImageContainer>         
                                 <div>{element.title} ({element.date_display})</div>
                                 <LinkPath to={`/artist/${element.artist_title}`}>{element.artist_title}</LinkPath>
                                 <div>{element.category_titles.map(e=>{
                                     return <LinkPath to={`/collection/${e}`} onClick={()=>onClickCategory()} className='categories'> {e} </LinkPath>
                                 })}</div>
                                 {/* <Line/> */}
-                            </ArtPieceContainer>             
+                            </ArtPieceContainer>     
+                          
                         )
                     })}
-                </Content>
-            </>
+                </Content>       
+                : 
+                <LoadingScreen/>}
+
+           
+            </Wrapper>
         )
     }
 
-}
+
+const Wrapper = styled.div`
+padding: 0 48px;`
 
 const Content = styled.div`
     display: grid;
 
     grid-template-columns: 1fr 1fr 1fr;
-    grid-auto-flow: dense;
-    align-items: flex-start;
-    height: auto;
-    grid-column-gap: -1rem;
-    grid-row-gap: 0rem;
+
 
     `
 
@@ -101,7 +105,7 @@ flex-direction: column;
 align-items: center;
 text-align: center;
 gap: 8px;
-margin: 0;
+margin: 16px 0;
 
 .categories {
     :not(:last-child) {

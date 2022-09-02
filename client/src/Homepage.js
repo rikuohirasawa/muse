@@ -11,7 +11,6 @@ export const HomePage = () => {
   const navigate = useNavigate();
   return (
         <>
-
             <Content>
               <TextWrapper>
                   <HeadingTextSmall>Art Institute of</HeadingTextSmall>
@@ -41,6 +40,7 @@ const ImageLarge = styled.img`
   height: 100%;
   object-fit: cover;
   filter: grayscale(100%);
+  animation: 1s ease-in 0s 1 fadein;
 `
 
 const ImageSmall = styled.img`
@@ -48,6 +48,7 @@ const ImageSmall = styled.img`
   filter: grayscale(100%);
   width: 550px;
   z-index: -1;
+  animation: 1s ease-in 0s 1 fadein;
 `
 const Content = styled.div`
     height: 100%;
@@ -97,7 +98,7 @@ width: 100%;
 `
 
 const BgContainer = styled.div`
-animation: 2s ease-in 0s 1 fadein;
+animation: 3s ease-in 0s 1 fadein;
 margin: 0;
 padding: 0;
 margin: -130px 0 0 0;

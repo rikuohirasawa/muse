@@ -75,6 +75,8 @@ display: flex;
 justify-content: space-between;
 align-items: center;
 border-bottom: 1px solid #E3E2E2;
+background: transparent;
+
 `
 
 const LogoText = styled(Link)`

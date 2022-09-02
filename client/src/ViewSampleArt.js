@@ -3,6 +3,7 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/swiper.min.css'
 import { useEffect, useState } from "react"
 import { useNavigate, Link } from "react-router-dom"
+import { LoadingScreen } from "./LoadingScreen"
 
 
 export const ViewSampleArt = () => {
@@ -63,7 +64,9 @@ export const ViewSampleArt = () => {
             </Container>
                     
             )} else {
-                return <div>loading</div>
+                return (
+                <LoadingScreen/>
+                )
             }
                             }
 

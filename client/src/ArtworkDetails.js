@@ -6,6 +6,7 @@ import {Line, LinkPath} from './GlobalStyles'
 import { useContext } from "react"
 import { UserContext } from "./UserContext"
 import { LikeButton } from "./LikeButton"
+import { LoadingScreen } from "./LoadingScreen"
 import { addToFavorites } from "./utils"
 import {BsSuitHeart, BsSuitHeartFill} from 'react-icons/bs'
 
@@ -138,10 +139,11 @@ export const ArtworkDetails = () => {
                 // I suspect because of the || operator immediately preceding it?
                 <></>
             }
-
-                
-
             </Content>
+        )
+    } else {
+        return (
+            <LoadingScreen/>
         )
     }
 }

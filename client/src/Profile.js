@@ -4,6 +4,7 @@ import { UserContext } from './UserContext';
 import { useEffect, useState, useContext } from 'react'
 import { ProfileSetup } from './ProfileSetup';
 import { Line } from './GlobalStyles';
+import { LoadingScreen } from './LoadingScreen';
 import { useNavigate } from 'react-router-dom';
 
 export const Profile = () => {
@@ -35,7 +36,7 @@ export const Profile = () => {
             </FlexContainer>
             <Line/>
             <Title>Your Collection</Title>
-            {userCollection ? 
+            {userCollection && userInfo.favorites.length > 0 ? 
             <UserCollection>
                 {userCollection.map(e=>{
                     return (
@@ -49,9 +50,13 @@ export const Profile = () => {
                 })}
                 </UserCollection>
                 : 
+                userInfo.favorites.length === 0 ? 
                 <div>
                     <Title>You haven't added anything to your collection yet</Title>
-                </div>}
+                </div>
+                :      
+                <></>
+                }
             </>
         )
     } else {
@@ -95,10 +100,9 @@ const Artwork = styled.img`
     &:focus {
     transform: scale(1.05)
 }`
-const Feed = styled.div``
 
 const UserCollection = styled.div`
 display: grid;
 grid-template-columns: 1fr 1fr 1fr 1fr;
-border: 1px solid blue;
+
 `
