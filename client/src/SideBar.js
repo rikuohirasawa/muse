@@ -5,10 +5,12 @@ import {GrPowerReset} from 'react-icons/gr'
 import {IoIosArrowBack, IoIosArrowForward} from 'react-icons/io'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useAuth0 } from "@auth0/auth0-react";
 
 export const SideBar = () => {
     const [sidebarDisplay, setSidebarDisplay] = useState(false);
     const [yearFilter, setYearFilter] = useState(0);
+    const { isAuthenticated } = useAuth0();
     
     const navigate = useNavigate();
     const styles = {
@@ -101,7 +103,12 @@ export const SideBar = () => {
                         e.preventDefault();
                         setYearFilter(0);
                         }}><GrPowerReset/></YearResetBtn></div>
-                <FormControlLabel control={<Input name='customSearch' style={styles.input} disableUnderline={true} placeholder='e.g. Cats' size='small'/>} label={<Typography style={styles.inputLabel}>Custom Search</Typography>} labelPlacement='top'/>
+                {isAuthenticated ? 
+                 <FormControlLabel control={<Input name='customSearch' style={styles.input} disableUnderline={true} placeholder='e.g. Cats' size='small'/>} label={<Typography style={styles.inputLabel}>Custom Search</Typography>} labelPlacement='top'/>
+                :
+                <FormControlLabel control={<Input disabled='true' name='customSearch' style={styles.input} disableUnderline={true} size='small'/>} label={<Typography style={styles.inputLabel}>Log in to custom search</Typography>} labelPlacement='top'/>
+                }
+               
                 <FilterButton type='submit'><BsFilter/> Filter</FilterButton>
             </SearchSelect>
             </FilterForm>

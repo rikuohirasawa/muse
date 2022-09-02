@@ -6,8 +6,8 @@ import { SignInButton } from './SignInButton';
 import { SignOutButton } from './SignOutButton';
 
 import { useAuth0 } from "@auth0/auth0-react";
-import { v4 as uuidv4 } from 'uuid'
 import { useEffect, useContext } from 'react';
+
 
 import { UserContext } from './UserContext';
 
@@ -53,11 +53,15 @@ export const Header = () => {
         <Wrapper>
             <LogoText to='/'>Muse</LogoText>
             <Content>
+                {isAuthenticated &&
+                <>
                 <SearchBar id='searchBar' onSubmit={(e)=>{searchSubmit(e)}}>
                     <SearchInput type='text' placeholder='e.g. Monet' name='search'/>
                     <SearchButton type='submit'><SearchIcon/></SearchButton>
                 </SearchBar>
                 <HeaderLink to='/profile'>Profile</HeaderLink>
+                </>
+                }
                 {isAuthenticated ?
                 <SignOutButton/>
                 : 
@@ -115,8 +119,6 @@ color: inherit;
 background: inherit;
 border: none;
 font-size: 1.5rem;
-
-
 cursor: pointer;
 `
 
