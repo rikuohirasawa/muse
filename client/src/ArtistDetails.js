@@ -2,6 +2,7 @@ import styled from "styled-components"
 import { useEffect, useState } from "react"
 import { useParams, useNavigate } from "react-router-dom"
 import { Line, LinkPath } from "./GlobalStyles"
+import { LikeButton } from "./LikeButton"
 
 export const ArtistDetails = () => {
     const navigate = useNavigate();
@@ -41,10 +42,16 @@ export const ArtistDetails = () => {
                 <Content>
                     {artistInfo.map((element, index)=>{
                         return (
-                            <ArtPieceContainer >
+                            <ArtPieceContainer>
+                            <ImageContainer>
+                            <LikeButton 
+                                style={{margin: '0 10px -27px 0',
+                                zIndex: '2'}}
+                                id={element.id}/>
                                 <Image 
                                 src={`https://www.artic.edu/iiif/2/${element.image_id}/full/843,/0/default.jpg`}
                                 onClick={()=>{navigate(`/artwork/${element.id}`)}}/>
+                            </ImageContainer>
                                 <div>{element.title} ({element.date_display})</div>
                                 <div>{element.category_titles.map(e=>{
                                     return <LinkPath to={`/collection/${e}`} className='categories'> {e} </LinkPath>
@@ -84,6 +91,7 @@ flex-direction: column;
 align-items: center;
 text-align: center;
 gap: 8px;
+border: 1px solid red;
 
 .categories {
     :not(:last-child) {
@@ -91,6 +99,12 @@ gap: 8px;
         margin-right: 5px;
     }
 }`
+
+const ImageContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+`
 
 const Image = styled.img`
 width: 100%;

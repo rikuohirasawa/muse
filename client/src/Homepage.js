@@ -135,4 +135,10 @@ const DiscoverButton = styled.button`
   max-height: 40px;
 
   cursor: pointer;
+
+  transition: all .2s ease-in-out;
+&:hover,
+&:focus {
+transform: scale(1.05)
+};
 `
