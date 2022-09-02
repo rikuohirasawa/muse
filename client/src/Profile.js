@@ -11,8 +11,12 @@ export const Profile = () => {
     const [userCollection, setUserCollection] = useState(null);
     const navigate = useNavigate();
 
+
+    // fetch information for favorited items
     useEffect(()=>{
+        console.log(userInfo.favorites.length)
         if (userInfo.favorites.length > 0) {
+
             fetch(`https://api.artic.edu/api/v1/artworks?ids=${userInfo.favorites.join(',')}
             &fields=title,image_id,artist_title,id`)
             .then(res=>res.json())

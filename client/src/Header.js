@@ -6,11 +6,14 @@ import { SignInButton } from './SignInButton';
 import { SignOutButton } from './SignOutButton';
 
 import { useAuth0 } from "@auth0/auth0-react";
+import { v4 as uuidv4 } from 'uuid'
 import { useEffect, useContext } from 'react';
 
 import { UserContext } from './UserContext';
 
 export const Header = () => {
+
+
     const { user, isAuthenticated, isLoading } = useAuth0();
     const {dispatch} = useContext(UserContext);
 
@@ -45,9 +48,6 @@ export const Header = () => {
         navigate(`/collection/${input}`)
     };
 
-
-    console.log(user)
-    console.log(isAuthenticated)
 
     return (
         <Wrapper>

@@ -58,7 +58,8 @@ const addNewUser = async (req, res) => {
             const newUser = await db.collection('users').insertOne({
                 email: req.body.email,
                 nickname: req.body.nickname,
-                profileSetup: false
+                profileSetup: false,
+                favorites: []
             })
             if (newUser) {
                 res.status(201).json({
@@ -66,7 +67,8 @@ const addNewUser = async (req, res) => {
                     data: {
                     email: req.body.email,
                     nickname: req.body.nickname,
-                    profileSetup: false
+                    profileSetup: false,
+                    favorites: []
                     }
                 })
             } else {
