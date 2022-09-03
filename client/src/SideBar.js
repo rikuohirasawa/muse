@@ -108,9 +108,8 @@ export const SideBar = () => {
                 {isAuthenticated ? 
                  <FormControlLabel control={<Input name='customSearch' style={styles.input} disableUnderline={true} placeholder='e.g. Cats' size='small'/>} label={<Typography style={styles.inputLabel}>Custom Search</Typography>} labelPlacement='top'/>
                 :
-                <FormControlLabel control={<Input disabled='true' name='customSearch' style={styles.input} disableUnderline={true} size='small'/>} label={<Typography style={styles.inputLabel}>Log in to custom search</Typography>} labelPlacement='top'/>
-                }
-               
+                <FormControlLabel control={<Input disabled={true} name='customSearch' style={styles.input} disableUnderline={true} size='small'/>} label={<Typography style={styles.inputLabel}>Log in to custom search</Typography>} labelPlacement='top'/>
+                }             
                 <FilterButton type='submit'><BsFilter/> Filter</FilterButton>
             </SearchSelect>
             </FilterForm>

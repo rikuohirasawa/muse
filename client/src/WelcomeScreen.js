@@ -8,7 +8,6 @@ export const WelcomeScreen = () => {
             <h1>Muse</h1>
             <ButtonContainer>
                 <ButtonLink onClick={()=>{navigate('/home')}}>Home</ButtonLink>
-
                 <ButtonLink onClick={()=>{navigate('/muse')}}>Discover</ButtonLink>
                 <ButtonLink onClick={()=>{navigate('/about')}}>About</ButtonLink>
             </ButtonContainer>

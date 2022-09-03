@@ -15,8 +15,6 @@ import { useLocation } from 'react-router-dom';
 export const Header = () => {
 
     const location = useLocation();
-
-
     const { user, isAuthenticated, isLoading } = useAuth0();
     const {dispatch} = useContext(UserContext);
 
@@ -26,6 +24,7 @@ export const Header = () => {
     // events - I will likely come back in the future and fix this when I become more familiar
     useEffect(()=>{
         if (isAuthenticated) {
+            console.log(isAuthenticated)
             fetch('/user/new-user', {
                 method: 'POST',
                 headers: {
@@ -34,7 +33,9 @@ export const Header = () => {
                     email: user.email,
                     nickname: user.nickname,
                 })
-            }).then(res=>res.json())
+            }).then(res=>{
+                console.log('res')
+                return res.json()})
             .then((data)=>{
                 console.log(data.data)
                 dispatch({type: 'set-user-info', userInfo: data.data})

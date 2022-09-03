@@ -15,6 +15,7 @@ import { WelcomeScreen } from './WelcomeScreen';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useEffect } from 'react';
 import { SearchCollection } from './SearchCollection';
+import { FindUserProfile } from './FindUserProfile';
 
 
 const App = () => {
@@ -42,6 +43,7 @@ const App = () => {
             <Route exact path='/about' element={<About/>}/>
             <Route exact path='/collection/:search' element={<SearchCollection/>}/>
             <Route exact path='/profile' element={<Profile/>}/>
+            <Route exact path='/user/:id' element={<FindUserProfile/>}/>
           </Routes>
           <Footer/>
         </FlexColumn>

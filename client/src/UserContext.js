@@ -5,6 +5,7 @@ export const UserContext = createContext(null);
 
 const initialState = {
     profileSetup: false,
+    followingUsers: [],
     userInfo: {
         profileSetup: false,
         favorites: []
@@ -31,6 +32,11 @@ const reducer = (state, action) => {
                     favorites: action.favorites
                 }
             }
+        } case 'user-following' : {
+            return {
+                ...state,
+                followingUsers: action.followingUsers
+            }
         }
         default: throw new Error ('Reducer/dispatch error')
     }
@@ -38,7 +44,6 @@ const reducer = (state, action) => {
 
 export const UserContextProvider = ({children}) => {
     const [state, dispatch] = useReducer(reducer, initialState);
-
     return (
         <UserContext.Provider
             value={{

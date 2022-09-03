@@ -45,7 +45,6 @@ const getUserByEmail = async (req, res) => {
 const addNewUser = async (req, res) => {
     const client = new MongoClient(MONGO_URI, options);
     const db = client.db('muse');
-    console.log(req.body)
     try {
         await client.connect();
         const user = await db.collection('users').findOne({email: req.body.email});
@@ -106,8 +105,6 @@ const updateUserProfile = async (req, res) => {
             favorites: []
         }}, { upsert: false }
     );
-    console.log(req.body.bio)
-    console.log(updateUser.value)
     // previously I tried to use updateOne instead of findOneAndUpdate and it returned
     // only information regarding the update itself, and not the item itself 
     // this solution is not nearly as clean but does return the value I'm looking for
@@ -130,4 +127,87 @@ const updateUserProfile = async (req, res) => {
 }
 }
 
-module.exports = { getUserByEmail, addNewUser, updateUserProfile }
+const findAllUsers = async (req, res) => {
+    const client = new MongoClient(MONGO_URI, options);
+    const db = client.db('muse');
+    try {
+        await client.connect();
+        const users = await db.collection('users').find().toArray();
+        if (users) {
+            return res.status(200).json({
+                status: 200,
+                data: users
+            })
+        } else {
+            res.status(404).json({
+                status: 404,
+                message: 'Error fetching all users'
+            })};
+} catch(err) {
+    res.status(505).json({
+        status: 505,
+        message: err.message
+    })
+}
+}
+
+
+const findAllFollowedUsers = async (req, res) => {
+    const client = new MongoClient(MONGO_URI, options);
+    const db = client.db('muse');
+    try {
+        await client.connect();
+        const users = await db.collection('users').findOne({email: req.params.email})
+        console.log(req.params.email)
+        const followedUsers = await Promise.all(users.following.map(async e=>{
+            return (
+                await db.collection('users').findOne({email: e})
+            )
+        }))
+        if (users && followedUsers) {
+            res.status(200).json({
+                status: 200,
+                data: followedUsers
+            })
+        } else {
+            res.status(404).json({
+                status: 404,
+                message: 'Error finding followed users'
+            })};
+} catch(err) {
+    res.status(505).json({
+        status: 505,
+        message: err.message
+    })
+}
+}
+
+
+// I only figured out the ObjectId class late in the project, before I was using email
+// for everything, I can go back and fix this later
+const getUserById = async (req, res) => {
+    const client = new MongoClient(MONGO_URI, options);
+    const db = client.db('muse');
+    const ObjectId = require('mongodb').ObjectId;
+    try {
+    await client.connect();
+    const user = await db.collection('users').findOne({'_id': ObjectId(req.params.id)});
+    if (user) {
+        res.status(200).json({
+            status: 200,
+            data: user
+        })
+    } else {
+    res.status(404).json({
+        status: 404,
+        message: 'User not found'
+    })};
+    } catch (err) {
+        res.status(500).json({
+            status: 500,
+            message: err.message
+        })
+    };
+}
+
+module.exports = { getUserByEmail, addNewUser, updateUserProfile, findAllUsers, findAllFollowedUsers, getUserById }
