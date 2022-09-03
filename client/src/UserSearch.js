@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+import { LinearProgress } from '@mui/material';
 
 export const UserSearch = () => {
     const [allUsers, setAllUsers] = useState(null);
@@ -26,7 +27,6 @@ export const UserSearch = () => {
         const filterSuggestions = suggestions.filter(e=>{
             return e.name.toLowerCase().includes(inputValue.toLowerCase())
         })
-        console.log(suggestions)
         return (
             <Wrapper>
                 <SearchBar 
@@ -38,26 +38,58 @@ export const UserSearch = () => {
                 &&
                 <SearchList>
                     {filterSuggestions.map(e=>{
+                        let indexOfSuggestedText = e.name.toLowerCase().indexOf(inputValue.toLowerCase());
+                        let userText = e.name.slice(0, indexOfSuggestedText + inputValue.length);
+                        let suggestedText = e.name.slice(indexOfSuggestedText + inputValue.length);
                         return (
                             <SearchItem onClick={()=>{navigate(`/user/${e.id}`)}}>
-                                {e.name}
+                                <Avatar src={e.avatarSrc}/><span className='text-margin'>{userText}<span className='suggested-text'>{suggestedText}</span></span>
                             </SearchItem>
                         )
                     })}
                 </SearchList>}
             </Wrapper>
-    
         )
-
+    } else {
+        return <LinearProgress color="inherit" style={{width: '280px'}}/>
     }
-
 }
 
+
+const Avatar = styled.img`
+width: 60px;
+height: 60px;
+border-radius: 50%;
+`
 const Wrapper = styled.div`
+margin: 0 auto;
 `
 
-const SearchBar = styled.input``
+const SearchBar = styled.input`
+font-size: 1.5rem;
+font-family: inherit;
+padding: 8px;`
 
-const SearchList = styled.ul``
+const SearchList = styled.ul`
+padding: 0;
+margin: 0;`
 
-const SearchItem = styled.li``
+const SearchItem = styled.li`
+list-style: none;
+padding: 8px;
+display: flex;
+align-items: center;
+
+cursor: pointer;
+
+&:hover {
+    background: #E3E2E2;
+}
+
+.text-margin {
+    margin: 0 auto;
+}
+
+.suggested-text {
+    font-weight: 700;
+}`

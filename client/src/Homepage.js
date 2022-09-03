@@ -6,9 +6,25 @@ import { useNavigate } from 'react-router-dom';
 
 export const HomePage = () => {
 
-  // const randomArtGenerator = [35772, 126289, 94020, 212427, 190300, 81539, 197069, 61939, 25363, 10983, 14977, 145149, 3452, 62345, 6565, 2582]
-  // const randomIndex = Math.floor(Math.random)
+const smallImageArray = [
+  'https://www.artic.edu/iiif/2/37dcc4be-7710-d7e0-f41a-1ba8d07bb6c5/full/843,/0/default.jpg',
+  'https://www.artic.edu/iiif/2/7a4b9f82-ff54-4cac-e1e6-36aa87c636b3/full/843,/0/default.jpg',
+  'https://www.artic.edu/iiif/2/f95a0a70-90c5-2806-2a66-68f27f8c0735/full/843,/0/default.jpg',
+  'https://www.artic.edu/iiif/2/5501b7d6-19ff-8f95-948c-b96625fa4ddc/full/843,/0/default.jpg'
+]
 
+const largeImageArray = [
+  'https://www.artic.edu/iiif/2/e45e0786-6d04-dd63-e056-e6afacf5a95f/full/843,/0/default.jpg',
+  'https://www.artic.edu/iiif/2/e7f4caac-6a16-e332-9a51-34f986d4b451/full/843,/0/default.jpg',
+  'https://www.artic.edu/iiif/2/84e2baea-852e-de08-33d5-e0e8ec4cd7a5/full/843,/0/default.jpg',
+  'https://www.artic.edu/iiif/2/9dbfc5f2-4a2a-3373-d483-4314a3cdc195/full/843,/0/default.jpg'
+]
+
+  const getRandomIndex = (length) => {
+    return Math.floor(Math.random() * length)
+  }
+  console.log(getRandomIndex(smallImageArray.length))
+  console.log(smallImageArray[getRandomIndex(smallImageArray.length)])
   const navigate = useNavigate();
   return (
         <>
@@ -17,14 +33,16 @@ export const HomePage = () => {
                   <HeadingTextSmall>Art Institute of</HeadingTextSmall>
                   <BgContainer><HeadingTextLarge>Chicago</HeadingTextLarge></BgContainer>
                   <div className='flex-wrapper'>
-                    <ImageSmall src='https://www.artic.edu/iiif/2/f95a0a70-90c5-2806-2a66-68f27f8c0735/full/843,/0/default.jpg'/>
+                  <ImageSmall src={smallImageArray[getRandomIndex(smallImageArray.length)]}/>
+                    {/* <ImageSmall src='https://www.artic.edu/iiif/2/f95a0a70-90c5-2806-2a66-68f27f8c0735/full/843,/0/default.jpg'/> */}
                     <div>
                       <div>Browse one of the world's largest collections...</div>
                       <DiscoverButton onClick={()=>{navigate('/muse')}}>Show me something</DiscoverButton>
                     </div>
                   </div>
               </TextWrapper>  
-              <ImageLarge src='https://www.artic.edu/iiif/2/e7f4caac-6a16-e332-9a51-34f986d4b451/full/843,/0/default.jpg'/>      
+              <ImageLarge src={largeImageArray[getRandomIndex(largeImageArray.length)]}/>  
+              {/* <ImageLarge src='https://www.artic.edu/iiif/2/e7f4caac-6a16-e332-9a51-34f986d4b451/full/843,/0/default.jpg'/>       */}
             </Content>
             <StatsContainer>
                 <div>300K Artworks</div>

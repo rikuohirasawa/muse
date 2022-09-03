@@ -77,13 +77,15 @@ export const Profile = () => {
                     }}>{e.email}</div>
                 )
             })} */}
-    <UserSearch/>
+
             <TitlesContainer>
                 <Title style={{background: displayToggle === 'following' && '#E3E2E2'}} onClick={()=>{setDisplayToggle('following')}}>Following</Title>
                 <Title style={{background: displayToggle === 'collection' && '#E3E2E2'}} onClick={()=>{setDisplayToggle('collection')}}>Your Collection</Title>
+                <Title style={{background: displayToggle === 'search' && '#E3E2E2'}} onClick={()=>{setDisplayToggle('search')}}>Search Users</Title>
             </TitlesContainer>
             
             {displayToggle === 'following' ?
+  
             <FollowingContainer>
             {followingUsers && followingUsers.length > 0 ?
                 followingUsers.map(e=>{
@@ -101,8 +103,9 @@ export const Profile = () => {
                     })
                     :
                     <div>You are not following anyone yet</div>}
-            </FollowingContainer>
-            :
+            </FollowingContainer>       
+            
+            : displayToggle === 'collection' ?
             userCollection && userInfo.favorites.length > 0 ? 
                 <UserCollection>
                     {userCollection.map(e=>{
@@ -123,7 +126,14 @@ export const Profile = () => {
                     </div>
                     :      
                     <></>
-                    }
+                :
+                <BackgroundImage>
+                    <SearchContainer>
+                    <div className='searchbar-title'>Search Other Users</div>
+                    <UserSearch/>
+                    </SearchContainer>
+                </BackgroundImage>
+                }
                 </>
             )
         } else {
@@ -141,6 +151,13 @@ const Title = styled.h2`
     justify-content: center;
     align-items: center;`
 
+const FlexWrap = styled.div`
+display: flex;
+justify-content: space-evenly;
+border: 1px solid black;
+flex-direction: column;
+align-items: center;
+`
 const FlexContainer = styled.div`
     display: flex;
     align-items: center;
@@ -198,5 +215,33 @@ const Artwork = styled.img`
 const UserCollection = styled.div`
 display: grid;
 grid-template-columns: 1fr 1fr 1fr 1fr;
-
 `
+
+const BackgroundImage = styled.div`
+background-image: url(https://www.artic.edu/iiif/2/d141a769-24af-ff07-d792-183ae73ae765/full/843,/0/default.jpg);
+height: 100%;
+width: 100%;
+filter: grayscale(100%);
+height: 100%;
+margin: 16px 0;
+display: flex;
+align-items: center;
+
+margin: 0 auto;
+`
+
+const SearchContainer = styled.div`
+background: #fff;
+display: flex;
+flex-direction: column;
+align-items: center;
+gap: 30px;
+width: 400px;
+margin: 0 auto;
+border: 1px solid white;
+padding: 16px 0;
+min-height: 300px;
+
+.searchbar-title {
+    font-size: 1.5rem;
+}`
