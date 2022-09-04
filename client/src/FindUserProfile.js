@@ -17,12 +17,14 @@ export const FindUserProfile = () => {
     const [userProfile, setUserProfile] = useState({favorites: []});
     const [userCollection, setUserCollection] = useState(null);
     
+    // fetch user information
     useEffect(()=>{
         fetch(`/userId/${id}`)
         .then(res=>res.json())
         .then(data=>setUserProfile(data.data))
     }, [])
 
+    // fetch user favorites
     useEffect(()=>{
         if (userProfile && userProfile.favorites.length > 0) {
             fetch(`https://api.artic.edu/api/v1/artworks?ids=${userProfile.favorites.join(',')}
@@ -45,6 +47,7 @@ export const FindUserProfile = () => {
                 </div>
             </FlexContainer>
             <TitlesContainer>
+                {/* use preferred name if user has set that, otherwise use auth0 nickname */}
                 {
                 userProfile.name ? 
                 <Title>{userProfile.name}'s Collection</Title>
@@ -148,7 +151,6 @@ const Avatar = styled.img`
 `
 
 const Title = styled.h2`
-    cursor: pointer;
     width: 100%;
     height: 100%;
     display: flex;

@@ -7,6 +7,7 @@ import { useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { useAuth0 } from "@auth0/auth0-react";
 
+// first time really trying to implement MUI, code is definitely not perfect but as I become more familiar I can definitely clean it up some
 export const SideBar = () => {
     const [sidebarDisplay, setSidebarDisplay] = useState(false);
     const [yearFilter, setYearFilter] = useState(0);
@@ -155,7 +156,6 @@ const SideBarToggle = styled.div`
     justify-content: space-between;
     flex-direction: column;
     transition: all 0.5s ease-in-out;
-
     justify-content: space-between;
 
 `

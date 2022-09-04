@@ -1,11 +1,10 @@
 import styled from 'styled-components'
-import { Line } from './GlobalStyles';
-import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 
 export const HomePage = () => {
 
+// arrays of images I liked and had appropriate size to render on the homepage
 const smallImageArray = [
   'https://www.artic.edu/iiif/2/37dcc4be-7710-d7e0-f41a-1ba8d07bb6c5/full/843,/0/default.jpg',
   'https://www.artic.edu/iiif/2/7a4b9f82-ff54-4cac-e1e6-36aa87c636b3/full/843,/0/default.jpg',
@@ -18,13 +17,12 @@ const largeImageArray = [
   'https://www.artic.edu/iiif/2/e7f4caac-6a16-e332-9a51-34f986d4b451/full/843,/0/default.jpg',
   'https://www.artic.edu/iiif/2/84e2baea-852e-de08-33d5-e0e8ec4cd7a5/full/843,/0/default.jpg',
 ]
-
-  const getRandomIndex = (length) => {
+// get random index to select a random image
+const getRandomIndex = (length) => {
     return Math.floor(Math.random() * length)
   }
-  console.log(getRandomIndex(smallImageArray.length))
-  console.log(smallImageArray[getRandomIndex(smallImageArray.length)])
   const navigate = useNavigate();
+  
   return (
         <>
             <Content>

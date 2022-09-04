@@ -5,7 +5,7 @@ import { useEffect, useState } from "react"
 import { useNavigate, Link } from "react-router-dom"
 import { LoadingScreen } from "./LoadingScreen"
 
-
+// carousel
 export const ViewSampleArt = () => {
     // local state to prevent re-render when context updates
     const [sampleArt, setSampleArt] = useState([]);
@@ -20,7 +20,6 @@ export const ViewSampleArt = () => {
         fetch('/api/sample-art')
             .then(res=>res.json())
             .then((data)=>{
-                console.log(data)
                 setSampleArt(data.data)
             }).catch(err =>{ console.log (err.message)})
     }, []);
@@ -100,11 +99,6 @@ const Content = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-
-
-    /* margin: auto; */
-
-
 `
 
 const Image = styled.img`

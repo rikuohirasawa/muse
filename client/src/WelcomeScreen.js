@@ -1,5 +1,7 @@
 import styled from "styled-components"
 import { useNavigate } from "react-router-dom"
+
+// page that renders on first load
 export const WelcomeScreen = () => {
     const navigate = useNavigate();
     return (

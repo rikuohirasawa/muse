@@ -56,7 +56,6 @@ const App = () => {
 
 
 // container to make sidebar stick to the side of page
-
 const FlexRow = styled.div`
   display: flex;
   background: transparent;
@@ -68,7 +67,6 @@ display: flex;
 flex-direction: column;
 width: 100%;
 height: 100vh;
-
 `
 
 export default App;

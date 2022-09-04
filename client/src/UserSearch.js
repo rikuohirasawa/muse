@@ -3,10 +3,7 @@ import { useEffect, useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { LinearProgress } from '@mui/material';
 import { FollowButton } from './FollowButton';
-import { UnFollowButton } from './UnFollowButton';
 import { UserContext } from './UserContext';
-
-import { LikeButton } from './LikeButton';
 
 export const UserSearch = () => {
     const [allUsers, setAllUsers] = useState(null);
@@ -15,7 +12,7 @@ export const UserSearch = () => {
 
     const navigate = useNavigate();
 
-    
+    // fetch all users to be used in searchbar
     useEffect(()=> {
         fetch('/users/find-all')
         .then(res=>res.json())
@@ -30,7 +27,6 @@ export const UserSearch = () => {
                         id: e._id,
                         email: e.email}
         })
-        console.log(followingUsers)
         const filterSuggestions = suggestions.filter(e=>{
             return e.name.toLowerCase().includes(inputValue.toLowerCase())
         })
@@ -45,7 +41,6 @@ export const UserSearch = () => {
                 &&
                 <SearchList>
                     {filterSuggestions.map(e=>{
-                        console.log(e)
                         let alreadyFollowing = false;
                         let indexOfSuggestedText = e.name.toLowerCase().indexOf(inputValue.toLowerCase());
                         let userText = e.name.slice(0, indexOfSuggestedText + inputValue.length);

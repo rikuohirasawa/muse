@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import { useEffect, useState } from "react"
-import { useParams, useNavigate, Link } from "react-router-dom"
+import { useParams, useNavigate } from "react-router-dom"
 import { LikeButton } from "./LikeButton"
 import { Line, LinkPath } from "./GlobalStyles"
 import { LoadingScreen } from "./LoadingScreen"
@@ -11,7 +11,6 @@ export const SearchCollection = () => {
     const searchTarget = useParams().search;
     const [searchInfo, setSearchInfo] = useState(null);
     const [renderPage, setRenderPage] = useState(false);
-    console.log(searchTarget)
 
     const onClickCategory = () => {
         setRenderPage(!renderPage);
@@ -71,16 +70,12 @@ export const SearchCollection = () => {
                                 <div>{element.category_titles.map(e=>{
                                     return <LinkPath to={`/collection/${e}`} onClick={()=>onClickCategory()} className='categories'> {e} </LinkPath>
                                 })}</div>
-                                {/* <Line/> */}
-                            </ArtPieceContainer>     
-                          
+                            </ArtPieceContainer>                  
                         )
                     })}
                 </Content>       
                 : 
-                <LoadingScreen/>}
-
-           
+                <LoadingScreen/>}      
             </Wrapper>
         )
     }
@@ -91,10 +86,7 @@ padding: 0 48px;`
 
 const Content = styled.div`
     display: grid;
-
     grid-template-columns: 1fr 1fr 1fr;
-
-
     `
 
 const ArtPieceContainer = styled.div`

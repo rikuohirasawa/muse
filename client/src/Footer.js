@@ -3,11 +3,14 @@ import { Link, useLocation } from 'react-router-dom';
 import {AiOutlineGithub, AiOutlineLinkedin} from 'react-icons/ai'
 export const Footer = () => {
     const location = useLocation();
+    // footer does not show on welcome page
     if (location.pathname !== '/') {
     return (
         <Wrapper>
+            {/* api documentation link */}
             <ApiDoc href='https://api.artic.edu/docs/'>API Documentation</ApiDoc>
             <IconLinks>
+                {/* socials links */}
                 <ExternalLink href='https://www.linkedin.com/in/rikuo-hirasawa-5085b9229/'><AiOutlineLinkedin/></ExternalLink>
                 <ExternalLink href='https://github.com/rikuohirasawa?tab=repositories'><AiOutlineGithub/></ExternalLink>
             </IconLinks>

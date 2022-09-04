@@ -1,15 +1,12 @@
 import styled from "styled-components"
 import { useEffect, useState } from "react"
-import { useParams, Link } from "react-router-dom"
+import { useParams } from "react-router-dom"
 import {IoIosArrowDown, IoIosArrowUp} from 'react-icons/io'
 import {Line, LinkPath} from './GlobalStyles'
 import { useContext } from "react"
 import { UserContext } from "./UserContext"
 import { LikeButton } from "./LikeButton"
 import { LoadingScreen } from "./LoadingScreen"
-import { addToFavorites } from "./utils"
-import {BsSuitHeart, BsSuitHeartFill} from 'react-icons/bs'
-
 
 
 export const ArtworkDetails = () => {
@@ -20,29 +17,17 @@ export const ArtworkDetails = () => {
 
     const {userInfo, dispatch} = useContext(UserContext);
     
-    // const addFavorites = (email, id) => {
-    //         fetch('/user/update-favorites', {
-    //         method: 'PATCH',
-    //         headers: {
-    //             'Content-Type': 'application/json'
-    //         }, body: JSON.stringify({
-    //             email: email,
-    //             artworkId: id
-    //         })
-    //     }).then(res=>res.json())
-    //     .then(data=>dispatch({type: 'update-user-favorites', favorites: data.value.favorites}))
-    //     .catch(err=>console.log(err.message))
-
-    // }
-
+    // toggle view for provenance text
     const toggleProvDisplay = () => {
         setProvDisplay(!provDisplay)
     }
 
+    // toggle view for exhibition display information
     const toggleExhibitionDisplay = () => {
         setExhibitionDisplay(!exhibitionDisplay)
     }
 
+    // fetch artwork details using url param (param is converted to number to match api id)
     useEffect(()=>{
         fetch(`https://api.artic.edu/api/v1/artworks/${artworkId}?
         fields=id,title,artist_titles,category_titles,date_display,
@@ -50,7 +35,6 @@ export const ArtworkDetails = () => {
         publication_history,exhibition_history,provenance_text`)
         .then(res=>res.json())
         .then((data)=>{
-            console.log(data.data)
             setArtworkDetails(data.data)
         })
     }, []);
@@ -61,6 +45,7 @@ export const ArtworkDetails = () => {
             <Content>
                 <InformationContainer>
                     <div>{artworkDetails.title}</div>
+                    {/* render unknown title if no artist titles provided, otherwise render link to artist details for each artist title */}
                     {artworkDetails.artist_titles.length === 0 ?
                     <div>Unknown</div>
                     :
@@ -75,7 +60,6 @@ export const ArtworkDetails = () => {
                             <Line/>
                             {artworkDetails.category_titles.map(e=>{
                                 return <LinkPath to={`/collection/${e}`}> {e} </LinkPath>
-                                
                                 })}
                         </>
                         }

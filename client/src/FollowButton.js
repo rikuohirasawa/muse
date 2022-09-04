@@ -1,15 +1,14 @@
 import styled from 'styled-components';
 import {BsPersonPlus, BsPersonCheck} from 'react-icons/bs'
-import { useContext, useState, useEffect } from 'react';
+import { useContext } from 'react';
 import { UserContext } from './UserContext';
 
 export const FollowButton = ({email, followEmail}) => {
     const { dispatch, userInfo } = useContext(UserContext);
 
+    // follow user - updates database and then sets context to reflect new changes
     const clickFollow = (e) => {
-
         e.stopPropagation();
- 
         fetch('/user/follow-user', {
             method: 'PATCH',
             headers: {
@@ -24,8 +23,8 @@ export const FollowButton = ({email, followEmail}) => {
         })
     }
 
+    // unfollow user - updates database and then sets context to reflect new changes
     const clickUnfollow = (e) => {
-
         e.stopPropagation();
         fetch('/user/unfollow-user', {
             method: 'PATCH',
@@ -41,7 +40,7 @@ export const FollowButton = ({email, followEmail}) => {
         })
     }
     
-    if (userInfo.profileSetup) {
+    if (userInfo.following) {
         return (
             <FollowBtn onClick={(e)=>{
                 !userInfo.following.includes(followEmail) ?

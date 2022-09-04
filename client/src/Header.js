@@ -45,6 +45,7 @@ export const Header = () => {
 
     const navigate = useNavigate();
     
+    // searchbar submit fx, will query api with input value
     const searchSubmit = (e) => {
         e.preventDefault();
         const searchForm = new FormData(document.forms.searchBar);
@@ -52,6 +53,7 @@ export const Header = () => {
         navigate(`/collection/${input}`)
     };
 
+    // do not render header on welcome page
     if (location.pathname !== '/') {
     return (
         <Wrapper>

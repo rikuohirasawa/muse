@@ -1,7 +1,6 @@
 
 
 export const addToFavorites = (email, id, dispatch) => {
-    console.log('testing addtofavs')
     fetch('/user/update-favorites', {
         method: 'PATCH',
         headers: {
@@ -12,7 +11,6 @@ export const addToFavorites = (email, id, dispatch) => {
         })
     }).then(res=>res.json())
     .then(data=>{
-        console.log(data)
         const { favorites } = data.data.value
         dispatch({type: 'update-user-favorites', favorites: [...favorites, id]})
     })      
@@ -20,7 +18,6 @@ export const addToFavorites = (email, id, dispatch) => {
 }
 
 export const deleteFavorite = (email, id, dispatch) =>{
-    console.log('testing deletefavs')
     fetch('/user/delete-favorite', {
         method: 'PATCH',
         headers: {

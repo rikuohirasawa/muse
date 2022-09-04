@@ -11,18 +11,10 @@ import { UserSearch } from './UserSearch';
 export const Profile = () => {
     const {dispatch, userInfo, followingUsers} = useContext(UserContext);
     const [userCollection, setUserCollection] = useState(null);
-    const [allUsers, setAllUsers] = useState(null);
     const [displayToggle, setDisplayToggle] = useState('collection'); 
     const navigate = useNavigate();
 
-    useEffect(()=> {
-        fetch('/users/find-all')
-        .then(res=>res.json())
-        .then(data=>setAllUsers(data.data))
-        .catch(err=>console.log(err.message))
-    }, [])
-
-
+    // fetch accounts that user is following
     useEffect(()=>{
         if (userInfo.email) {
             console.log(userInfo.email)
@@ -59,25 +51,6 @@ export const Profile = () => {
             <div className='user-bio'>{userInfo.bio}</div>
             </div>
             </FlexContainer>
-            {/* {allUsers && allUsers.map(e=>{
-                return (
-                    <div onClick={()=>{
-                        fetch('/user/follow-user', {
-                            method: 'PATCH',
-                            headers: {
-                                'Content-Type': 'application/json'
-                            }, body: JSON.stringify({
-                                email: userInfo.email,
-                                followEmail: e.email
-                            })
-                        }).then(res=>res.json())
-                        .then(data=>{
-                            console.log(data)
-                        })
-                    }}>{e.email}</div>
-                )
-            })} */}
-
             <TitlesContainer>
                 <Title style={{background: displayToggle === 'following' && '#E3E2E2'}} onClick={()=>{setDisplayToggle('following')}}>Following</Title>
                 <Title style={{background: displayToggle === 'collection' && '#E3E2E2'}} onClick={()=>{setDisplayToggle('collection')}}>Your Collection</Title>

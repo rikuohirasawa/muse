@@ -6,10 +6,8 @@ import { UserContext } from "./UserContext"
 
 export const LikeButton = ({id, style}) => {
     const {userInfo, dispatch} = useContext(UserContext);
+    // add and delete favorite functions imported from utils
     if (userInfo.profileSetup) {
-        // if (userInfo.favorites.includes(id)) {
-
-        // }
         return (
             <Button onClick={()=>{
             !userInfo.favorites.includes(id) ?

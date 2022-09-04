@@ -4,11 +4,11 @@ import { UserContext } from './UserContext';
 import { useEffect, useState, useContext } from 'react'
 
 export const ProfileSetup = () => {
-    const { user, isAuthenticated, isLoading } = useAuth0();
+    const { user } = useAuth0();
     const [placeholderAvatars, setPlaceholderAvatars] = useState(null);
     const [selectAvatar, setSelectAvatar] = useState(null);
     const [bioLength, setBioLength] = useState(120);
-    const {dispatch, userInfo} = useContext(UserContext);
+    const {dispatch} = useContext(UserContext);
     
 
     // fetch avatar options
@@ -20,7 +20,6 @@ export const ProfileSetup = () => {
 
     const clickAvatar = (image) => {
         setSelectAvatar(image)
-        console.log(selectAvatar)
     }
 
     const textAreaLengthFx = (e) => {
@@ -36,7 +35,6 @@ export const ProfileSetup = () => {
             avatarSrc: selectAvatar,
             bio: form.get('bio'),
         }
-        console.log(form.get('bio'))
         fetch('user/update-user', {
             method: 'PATCH',
             headers: {
@@ -47,6 +45,7 @@ export const ProfileSetup = () => {
         .catch(err=>console.log(err.message))
     }
     
+    // once avatar options are set, render profile setup
     if (placeholderAvatars) {
     return (
         <>
@@ -57,7 +56,6 @@ export const ProfileSetup = () => {
             <Input type='text' name='name' id='name' className='name-input' required/>
             </div>
             <div>Choose an avatar (you can change this later).</div>
-            {/* <Input type='file' name='avatar' id='avatar'/> */}
             <div className='avatar-container'>
             {placeholderAvatars.map(e=>{
                 return (

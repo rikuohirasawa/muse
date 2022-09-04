@@ -79,7 +79,6 @@ const Wrapper = styled.div`
 `
 const Content = styled.div`
     display: grid;
-    border: 1px solid red;
     grid-template-columns: 1fr 1fr 1fr;
 
     `
