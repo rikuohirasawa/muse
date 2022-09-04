@@ -1,8 +1,6 @@
-// import { useContext } from "react";
-// import { UserContext } from "./UserContext";
+
 
 export const addToFavorites = (email, id, dispatch) => {
-    // const {dispatch} = useContext(UserContext);
     console.log('testing addtofavs')
     fetch('/user/update-favorites', {
         method: 'PATCH',
@@ -37,4 +35,8 @@ export const deleteFavorite = (email, id, dispatch) =>{
         dispatch({type: 'update-user-favorites', favorites: favorites})
     })      
     .catch(err=>console.log(err.message))
+}
+
+export const followUser = (email, followEmail) => {
+    console.log('testing followuser')
 }

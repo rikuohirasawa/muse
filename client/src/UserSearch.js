@@ -1,11 +1,17 @@
 import styled from 'styled-components';
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { LinearProgress } from '@mui/material';
+import { FollowButton } from './FollowButton';
+import { UnFollowButton } from './UnFollowButton';
+import { UserContext } from './UserContext';
+
+import { LikeButton } from './LikeButton';
 
 export const UserSearch = () => {
     const [allUsers, setAllUsers] = useState(null);
     const [inputValue, setInputValue] = useState('');
+    const {dispatch, userInfo, followingUsers} = useContext(UserContext);
 
     const navigate = useNavigate();
 
@@ -17,13 +23,14 @@ export const UserSearch = () => {
         .catch(err=>console.log(err.message))
     }, [])
 
-    if (allUsers) {
+    if (allUsers && followingUsers) {
         const suggestions = allUsers.map(e=>{
                 return {name: e.name ? e.name : e.nickname,
                         avatarSrc: e.avatarSrc,
-                        id: e._id}
+                        id: e._id,
+                        email: e.email}
         })
-        console.log(suggestions)
+        console.log(followingUsers)
         const filterSuggestions = suggestions.filter(e=>{
             return e.name.toLowerCase().includes(inputValue.toLowerCase())
         })
@@ -38,12 +45,21 @@ export const UserSearch = () => {
                 &&
                 <SearchList>
                     {filterSuggestions.map(e=>{
+                        console.log(e)
+                        let alreadyFollowing = false;
                         let indexOfSuggestedText = e.name.toLowerCase().indexOf(inputValue.toLowerCase());
                         let userText = e.name.slice(0, indexOfSuggestedText + inputValue.length);
                         let suggestedText = e.name.slice(indexOfSuggestedText + inputValue.length);
+                        // forEach here as using a .includes was breaking my code (?)
+                        followingUsers.forEach(element=>{
+                            if (element._id === e.id) {
+                                alreadyFollowing = true
+                            }
+                        });
                         return (
                             <SearchItem onClick={()=>{navigate(`/user/${e.id}`)}}>
-                                <Avatar src={e.avatarSrc}/><span className='text-margin'>{userText}<span className='suggested-text'>{suggestedText}</span></span>
+                                <Avatar src={e.avatarSrc}/><span className='text-margin'>{userText}<span className='suggested-text'>{suggestedText}</span></span>            
+                                <FollowButton email={userInfo.email} followEmail={e.email}/>
                             </SearchItem>
                         )
                     })}

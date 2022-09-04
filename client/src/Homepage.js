@@ -17,7 +17,6 @@ const largeImageArray = [
   'https://www.artic.edu/iiif/2/e45e0786-6d04-dd63-e056-e6afacf5a95f/full/843,/0/default.jpg',
   'https://www.artic.edu/iiif/2/e7f4caac-6a16-e332-9a51-34f986d4b451/full/843,/0/default.jpg',
   'https://www.artic.edu/iiif/2/84e2baea-852e-de08-33d5-e0e8ec4cd7a5/full/843,/0/default.jpg',
-  'https://www.artic.edu/iiif/2/9dbfc5f2-4a2a-3373-d483-4314a3cdc195/full/843,/0/default.jpg'
 ]
 
   const getRandomIndex = (length) => {

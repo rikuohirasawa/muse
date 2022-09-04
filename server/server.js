@@ -15,7 +15,8 @@ const {
 const { 
     updateUserFavorites,
     deleteUserFavorite,
-    followUser
+    followUser,
+    unFollowUser
     } = require('./handlers/userActionHandlers')
 
 express()
@@ -35,6 +36,7 @@ express()
     .patch('/user/update-favorites', updateUserFavorites)
     .patch('/user/delete-favorite', deleteUserFavorite)
     .patch('/user/follow-user', followUser)
+    .patch('/user/unfollow-user', unFollowUser)
 
     .listen(8000, ()=>{
         console.log('server launched on 8000')

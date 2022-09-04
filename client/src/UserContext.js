@@ -8,7 +8,8 @@ const initialState = {
     followingUsers: [],
     userInfo: {
         profileSetup: false,
-        favorites: []
+        favorites: [],
+        following: []
     }
 };
 
@@ -36,6 +37,14 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 followingUsers: action.followingUsers
+            }
+        } case 'update-user-following': {
+            return {
+                ...state,
+                userInfo: {
+                    ...state.userInfo,
+                    following: action.following
+                }
             }
         }
         default: throw new Error ('Reducer/dispatch error')

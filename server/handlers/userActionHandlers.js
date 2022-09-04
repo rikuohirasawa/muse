@@ -106,5 +106,43 @@ const followUser = async (req, res) => {
             message: err.message
         })
     };
+};
+
+const unFollowUser = async (req, res) => {
+    const client = new MongoClient(MONGO_URI, options);
+    const db = client.db('muse');
+    try {
+        await client.connect();
+        // remove from users following array
+        const unFollowUser = await db.collection('users').findOneAndUpdate(
+            { email: req.body.email },
+            { $pull: {following: req.body.followEmail}},
+            // return document after to get the updated value (by default return original)
+            {returnDocument: 'after'}
+        )
+        // remove from users followers array
+        const removeFollowing = await db.collection('users').findOneAndUpdate(
+            { email: req.body.followEmail },
+            { $pull: {followers: req.body.email}},
+            // return document after to get the updated value (by default return original)
+            {returnDocument: 'after'}
+        )
+        if (unFollowUser && removeFollowing) {
+            res.status(201).json({
+                status: 201,
+                data: unFollowUser
+            })
+        } else {
+            res.status(404).json({
+                status: 404,
+                message: 'Error following user'
+            })
+        }
+    } catch(err) {
+        res.status(500).json({
+            status: 500,
+            message: err.message
+        })
+    };
 }
-module.exports = { updateUserFavorites, deleteUserFavorite, followUser }
+module.exports = { updateUserFavorites, deleteUserFavorite, followUser, unFollowUser }

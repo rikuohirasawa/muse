@@ -1,13 +1,15 @@
 import styled from "styled-components"
 import { useParams, useNavigate } from "react-router-dom"
-import { useEffect, useState } from "react"
+import { useEffect, useState, useContext } from "react"
 import {MdErrorOutline} from 'react-icons/md'
 import { LoadingScreen } from "./LoadingScreen"
+import { FollowButton } from "./FollowButton"
+import { UserContext } from './UserContext';
 
 export const FindUserProfile = () => {
     const id = useParams().id;
-    console.log(id)
     const navigate = useNavigate();
+    const { userInfo } = useContext(UserContext);
 
     // set initial state to favorites, so condition on second useEffect
     // does not break the application - this  does however make the conditional rendering
@@ -32,13 +34,13 @@ export const FindUserProfile = () => {
     }, [userProfile.favorites])
 
 
-    if (userProfile.nickname && userProfile.avatarSrc && userProfile.bio) {
+    if (userProfile.nickname && userProfile.bio) {
         return (
             <>
             <FlexContainer>
                 <Avatar src={userProfile.avatarSrc}/>
                 <div>
-                <h1>{userProfile.name}</h1>
+                <h1>{userProfile.name} <FollowButton email={userInfo.email} followEmail={userProfile.email}/></h1>
                 <div className='user-bio'>{userProfile.bio}</div>
                 </div>
             </FlexContainer>
@@ -78,7 +80,7 @@ export const FindUserProfile = () => {
                 }
             </>
         )
-    } else if (!userProfile.profileSetup && userProfile.nickname) {
+    } else if (userProfile.nickname && !userProfile.profileSetup) {
         return (
             <div style={{
                 height: '400px',
@@ -101,10 +103,10 @@ export const FindUserProfile = () => {
 
 }
 const UserCollection = styled.div`
-display: grid;
-grid-template-columns: 1fr 1fr 1fr 1fr;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
 
-`
+    `
 
 const ArtContainer = styled.div`
     display: flex;
@@ -154,9 +156,9 @@ const Title = styled.h2`
     align-items: center;`
 
 const TitlesContainer = styled.div`
-display: flex;
-justify-content: space-evenly;
-align-items: center;
-border-bottom: 1px solid #E3E2E2;
-border-top: 1px solid #E3E2E2;
-`
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    border-bottom: 1px solid #E3E2E2;
+    border-top: 1px solid #E3E2E2;
+    `
