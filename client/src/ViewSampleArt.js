@@ -21,7 +21,6 @@ export const ViewSampleArt = () => {
     }
     
     useEffect(()=>{
-        console.log('test')
         fetch('/api/sample-art')
             .then(res=>res.json())
             .then((data)=>{

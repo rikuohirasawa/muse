@@ -29,7 +29,6 @@ export const ArtistDetails = () => {
             &fields=title,id,image_id,date_display,category_titles,artist_title,thumbnail`)
             .then(res=>res.json())
             .then(data=>{
-                console.log(data)
                 setArtistInfo(data.data)
             })
         })
@@ -42,7 +41,7 @@ export const ArtistDetails = () => {
                 <Line/>
                 {artistInfo ?         
                 <Content>
-                    {artistInfo.map((element, index)=>{
+                    {artistInfo.map((element)=>{
                         return (
                             <ArtPieceContainer>
                             <ImageContainer>

@@ -34,10 +34,8 @@ export const Header = () => {
                     nickname: user.nickname,
                 })
             }).then(res=>{
-                console.log('res')
                 return res.json()})
             .then((data)=>{
-                console.log(data.data)
                 dispatch({type: 'set-user-info', userInfo: data.data})
             })
         }

@@ -23,7 +23,6 @@ express()
 .use(morgan("tiny"))
 .use(express.json())
 .use(express.urlencoded({ extended: false }))
-    .get('/testing', getArtIds)
     .get('/api/sample-art', getSampleArt)
     //user endpoints for database
     .get('/user/:email', getUserByEmail)

@@ -8,22 +8,15 @@ import { ViewSampleArt } from './ViewSampleArt';
 import { ArtworkDetails } from './ArtworkDetails';
 import { ArtistDetails } from './ArtistDetails';
 import { About } from './About';
-import { SignInPage } from './SignInPage';
 import { Profile } from './Profile';
 import { WelcomeScreen } from './WelcomeScreen';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { useEffect } from 'react';
 import { SearchCollection } from './SearchCollection';
 import { FindUserProfile } from './FindUserProfile';
 
 
 const App = () => {
-  useEffect(()=>{
-    fetch('/testing')
-    .then(res=>res.json())
-    .then(data=>console.log(data))
-  })
 
   return (
     <>
@@ -39,7 +32,6 @@ const App = () => {
             <Route exact path='/muse' element={<ViewSampleArt/>}/>
             <Route exact path='/artwork/:id' element={<ArtworkDetails/>}/>
             <Route exact path='/artist/:name' element={<ArtistDetails/>}/>
-            <Route exact path='/login' element={<SignInPage/>}/>
             <Route exact path='/about' element={<About/>}/>
             <Route exact path='/collection/:search' element={<SearchCollection/>}/>
             <Route exact path='/profile' element={<Profile/>}/>

@@ -158,7 +158,6 @@ const findAllFollowedUsers = async (req, res) => {
     try {
         await client.connect();
         const users = await db.collection('users').findOne({email: req.params.email})
-        console.log(req.params.email)
         const followedUsers = await Promise.all(users.following.map(async e=>{
             return (
                 await db.collection('users').findOne({email: e})

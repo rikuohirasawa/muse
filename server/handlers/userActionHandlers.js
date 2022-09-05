@@ -49,7 +49,6 @@ const deleteUserFavorite = async (req, res) => {
             // return document after to get the updated value (by default return original)
             {returnDocument: 'after'}
         )
-        console.log(deleteFavorite)
         if (deleteFavorite) {
             res.status(200).json({
                 status: 200,
