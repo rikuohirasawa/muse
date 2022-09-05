@@ -81,7 +81,7 @@ export const ArtworkDetails = () => {
                 />}
                     <Image 
                     src={`https://www.artic.edu/iiif/2/${artworkDetails.image_id}/full/843,/0/default.jpg`}
-                    alt={artworkDetails.thumbnail && artworkDetails.thumbnail.alt_text}/>
+                    alt={artworkDetails.thumbnail.alt_text ? artworkDetails.thumbnail.alt_text : 'No alt text provided by API, sorry 🙁'}/>
                 </ImageContainer>
                 {artworkDetails.provenance_text || artworkDetails.exhibition_history ?
                 <ReadMoreContainer>

@@ -23,13 +23,13 @@ export const ArtistDetails = () => {
             data.data.forEach(e=>{
                 idArray.push(e.id)
             })
-            console.log(idArray)
             return idArray
         }).then((ids)=> {
             fetch(`https://api.artic.edu/api/v1/artworks?ids=${ids.join(',')}
-            &fields=title,id,image_id,date_display,category_titles,artist_title`)
+            &fields=title,id,image_id,date_display,category_titles,artist_title,thumbnail`)
             .then(res=>res.json())
             .then(data=>{
+                console.log(data)
                 setArtistInfo(data.data)
             })
         })
@@ -52,6 +52,7 @@ export const ArtistDetails = () => {
                                 id={element.id}/>
                                 <Image 
                                 src={`https://www.artic.edu/iiif/2/${element.image_id}/full/843,/0/default.jpg`}
+                                alt={element.thumbnail.alt_text ? element.thumbnail.alt_text : 'No alt text provided by API, sorry 🙁'}
                                 onClick={()=>{navigate(`/artwork/${element.id}`)}}/>
                             </ImageContainer>
                                 <div>{element.title} ({element.date_display})</div>
@@ -106,4 +107,6 @@ const ImageContainer = styled.div`
 
 const Image = styled.img`
 width: 100%;
-cursor: pointer;`
+cursor: pointer;
+max-height: 400px;
+object-fit: cover;`

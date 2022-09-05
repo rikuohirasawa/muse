@@ -30,7 +30,7 @@ export const SearchCollection = () => {
             return idArray
         }).then((ids)=> {
             fetch(`https://api.artic.edu/api/v1/artworks?ids=${ids.join(',')}
-            &fields=title,id,image_id,date_display,category_titles,artist_title`)
+            &fields=title,id,image_id,date_display,category_titles,artist_title,thumbnail`)
             .then((res)=>{
                 if (!res.ok) {
                     throw new Error
@@ -52,7 +52,7 @@ export const SearchCollection = () => {
                 <Line/>
                 {searchInfo ?
                 <Content>
-                {searchInfo.map((element, index)=>{
+                {searchInfo.map((element)=>{
                         return (
                             <ArtPieceContainer >
                                 <ImageContainer>
@@ -63,6 +63,7 @@ export const SearchCollection = () => {
                                 />
                                 <Image 
                                 src={`https://www.artic.edu/iiif/2/${element.image_id}/full/843,/0/default.jpg`}
+                                alt={element.thumbnail.alt_text ? element.thumbnail.alt_text : 'No alt text provided by API, sorry 🙁'}
                                 onClick={()=>{navigate(`/artwork/${element.id}`)}}/>
                                 </ImageContainer>         
                                 <div>{element.title} ({element.date_display})</div>
@@ -91,7 +92,7 @@ const Content = styled.div`
 
 const ArtPieceContainer = styled.div`
 width: 400px;
-height: fit-content;
+height: auto;
 display: flex;
 flex-direction: column;
 align-items: center;
@@ -114,4 +115,6 @@ const ImageContainer = styled.div`
 
 const Image = styled.img`
 width: 100%;
-cursor: pointer;`
+cursor: pointer;
+max-height: 400px;
+object-fit: cover;`

@@ -5,6 +5,7 @@ import { useEffect, useState, useContext } from 'react'
 import { ProfileSetup } from './ProfileSetup';
 import { Line } from './GlobalStyles';
 import { LoadingScreen } from './LoadingScreen';
+import { LikeButton } from './LikeButton';
 import { useNavigate } from 'react-router-dom';
 import { UserSearch } from './UserSearch';
 
@@ -21,7 +22,6 @@ export const Profile = () => {
             fetch(`/users/following/${userInfo.email}`)
             .then(res=>res.json())
             .then(data=>{
-                console.log(data)
                 dispatch({type: 'user-following', followingUsers: data.data})})
         }
     }, [userInfo.email])
@@ -29,13 +29,13 @@ export const Profile = () => {
 
     // fetch information for favorited items
     useEffect(()=>{
-        console.log(userInfo.favorites.length)
         if (userInfo.favorites.length > 0) {
-
             fetch(`https://api.artic.edu/api/v1/artworks?ids=${userInfo.favorites.join(',')}
-            &fields=title,image_id,artist_title,id`)
+            &fields=title,image_id,artist_title,id,thumbnail`)
             .then(res=>res.json())
-            .then(data=>setUserCollection(data.data))
+            .then(data=>{
+                console.log(data)
+                setUserCollection(data.data)})
             .catch(err=>console.log(err.message))
         }
     }, [userInfo.favorites])
@@ -84,7 +84,14 @@ export const Profile = () => {
                     {userCollection.map(e=>{
                         return (
                             <ArtContainer>
+                                <LikeButton id={e.id}
+                                style={{
+                                    position: 'relative',
+                                    left: '27%',
+                                    top: '8%',
+                                    zIndex: '2'}}/>
                                 <Artwork src={`https://www.artic.edu/iiif/2/${e.image_id}/full/843,/0/default.jpg`}
+                                alt={e.thumbnail.alt_text ? e.thumbnail.alt_text : 'No alt text provided by API, sorry 🙁'}
                                 onClick={()=>{navigate(`/artwork/${e.id}`)}}/>
                                 <div>{e.title}</div>
                                 <div>{e.artist_title}</div>

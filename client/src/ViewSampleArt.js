@@ -1,10 +1,15 @@
 import styled from "styled-components"
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/swiper.min.css'
+import 'swiper/swiper-bundle.css';
+import 'swiper/components/navigation'
+import 'swiper/components/pagination'
+import SwiperCore, { Navigation, Pagination } from 'swiper'
 import { useEffect, useState } from "react"
 import { useNavigate, Link } from "react-router-dom"
 import { LoadingScreen } from "./LoadingScreen"
 
+SwiperCore.use([Navigation, Pagination])
 // carousel
 export const ViewSampleArt = () => {
     // local state to prevent re-render when context updates
@@ -27,11 +32,11 @@ export const ViewSampleArt = () => {
     if (sampleArt.length > 0) {
         return (
             <Container>
-            <Swiper slidesPerView={1}>
-              {sampleArt.map((element, index)=>{
+            <Swiper navigation slidesPerView={1}>
+              {sampleArt.map((element)=>{
                     if (element.image_id) {
                     return (
-                        <SwiperSlide>
+                        <SwiperSlide tag='li'>
                             <Content>
                                 <InformationContainer>
                                     <div>{element.title}</div>
@@ -53,9 +58,9 @@ export const ViewSampleArt = () => {
                                         </>
                                         }
                                 </InformationContainer>
-                                {console.log(element.thumbnail.alt_text)}
                                 <Image 
-                                src={`https://www.artic.edu/iiif/2/${element.image_id}/full/843,/0/default.jpg`} 
+                                src={`https://www.artic.edu/iiif/2/${element.image_id}/full/843,/0/default.jpg`}
+                                alt={element.thumbnail.alt_text ? element.thumbnail.alt_text : 'No alt text provided by API, sorry 🙁'}
                                onClick={()=>{handleClick(element.id)}}/>
                             </Content>
                             </SwiperSlide>)}})}
@@ -70,23 +75,15 @@ export const ViewSampleArt = () => {
                             }
 
 
-// alt={element.thumbnail && element.thumbnail.alt_text}
 const Container = styled.div`
 
-/* display: flex;
-align-items: center;
-justify-content: center; */
-
-.swiper-slide {
-    /* display: 'flex'; 
-    flex-direction: 'column';
-    justify-content: 'center';
-    align-items: 'center'; */
-
+.swiper-container {
+    max-width: 90vw;
 }
 
-.swiper-container {
-
+.swiper-button-prev,
+.swiper-button-next {
+    color: inherit;
 }
 
 .swiper-wrapper {
@@ -111,10 +108,12 @@ const InformationContainer = styled.div`
     max-width: 250px;
     display: flex;
     flex-direction: column;
-    gap: 6px;`
+    gap: 6px;
+    `
 
 
 const Line = styled.div`
     width: 100%;
     border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-    margin: 4px 0;`
+    margin: 4px 0;
+    `
