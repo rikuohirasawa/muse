@@ -16,6 +16,7 @@ export const ArtworkDetails = () => {
     const [exhibitionDisplay, setExhibitionDisplay] = useState(false);
 
     const {userInfo, dispatch} = useContext(UserContext);
+ 
     
     // toggle view for provenance text
     const toggleProvDisplay = () => {
@@ -100,7 +101,12 @@ export const ArtworkDetails = () => {
                     }
                     </div>
                   {provDisplay && 
-                  <div className='provenance-text'>{artworkDetails.provenance_text}</div>
+                  <div className='provenance-text'>
+                    {artworkDetails.provenance_text.length > 1400 ?
+                    artworkDetails.provenance_text.slice(0, 1400) + '...'
+                    : 
+                    artworkDetails.provenance_text}
+                    </div>
                   }   
                   <Line/>
                 </>
@@ -116,7 +122,12 @@ export const ArtworkDetails = () => {
                     </div>
                     {exhibitionDisplay && 
                     <>
-                    <div className="exhibition-history-text">{artworkDetails.exhibition_history}</div>
+                    <div className="exhibition-history-text">
+                        {artworkDetails.exhibition_history.length > 1400 ?
+                        artworkDetails.exhibition_history.slice(0, 1400) + '...'
+                        :
+                        artworkDetails.exhibition_history}
+                    </div>
                     </>
                     }
                 </>

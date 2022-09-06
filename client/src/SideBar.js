@@ -146,6 +146,8 @@ export const SideBar = () => {
 const Wrapper = styled.div`
     display: flex;
     border-right: 1px solid #E3E2E2;
+    margin-right: 20px;
+
 `
 
 const SideBarToggle = styled.div`
@@ -167,6 +169,7 @@ const ToggleDisplay = styled.button`
     border: none;
     cursor: pointer;
     background: inherit;
+    
 
 `
 

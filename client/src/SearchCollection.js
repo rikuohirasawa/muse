@@ -61,7 +61,8 @@ export const SearchCollection = () => {
                                     zIndex: '2'}}
                                     id={element.id} 
                                     />
-                                    {element.image_id ?                                     <Image 
+                                    {element.image_id ?                                     
+                                    <Image 
                                     src={`https://www.artic.edu/iiif/2/${element.image_id}/full/843,/0/default.jpg`}
                                     alt={element.thumbnail ? element.thumbnail.alt_text : 'No alt text provided by API, sorry 🙁'}
                                     onClick={()=>{navigate(`/artwork/${element.id}`)}}/>
