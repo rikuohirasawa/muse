@@ -35,7 +35,6 @@ export const FindUserProfile = () => {
         }
     }, [userProfile.favorites])
 
-
     if (userProfile.nickname && userProfile.bio) {
         return (
             <>
@@ -99,7 +98,6 @@ export const FindUserProfile = () => {
             <div style={{fontSize: '2rem'}}><MdErrorOutline/></div>
             </div>
         )
-
     } else {
         return <LoadingScreen/>
     }

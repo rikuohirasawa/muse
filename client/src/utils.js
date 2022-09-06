@@ -33,7 +33,3 @@ export const deleteFavorite = (email, id, dispatch) =>{
     })      
     .catch(err=>console.log(err.message))
 }
-
-export const followUser = (email, followEmail) => {
-    console.log('testing followuser')
-}

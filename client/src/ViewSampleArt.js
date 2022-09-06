@@ -24,6 +24,7 @@ export const ViewSampleArt = () => {
         fetch('/api/sample-art')
             .then(res=>res.json())
             .then((data)=>{
+                console.log(data)
                 setSampleArt(data.data)
             }).catch(err =>{ console.log (err.message)})
     }, []);
@@ -52,7 +53,7 @@ export const ViewSampleArt = () => {
                                         <>
                                             <Line/>
                                             {element.category_titles.map(e=>{
-                                            return <div> {e} </div>               
+                                            return <Link to={`/collection/${e}`} style={{color: 'inherit'}}> {e} </Link>               
                                         })}
                                         </>
                                         }
@@ -64,8 +65,7 @@ export const ViewSampleArt = () => {
                                 onClick={()=>{handleClick(element.id)}}/>
                                 :
                                 <div onClick={()=>{handleClick(element.id)}} style={{cursor: 'pointer'}}>No image provided</div>
-                                }
-                    
+                                }       
                             </Content>
                             </SwiperSlide>)}})}
                             </Swiper>
@@ -76,7 +76,7 @@ export const ViewSampleArt = () => {
                 <LoadingScreen/>
                 )
             }
-                            }
+}
 
 
 const Container = styled.div`
@@ -114,7 +114,6 @@ const InformationContainer = styled.div`
     flex-direction: column;
     gap: 6px;
     `
-
 
 const Line = styled.div`
     width: 100%;

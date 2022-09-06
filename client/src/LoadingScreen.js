@@ -7,7 +7,6 @@ export const LoadingScreen = () => {
             <h1 style={{fontWeight: '400'}}>Mu</h1>
             <LinearProgress color="inherit" style={{width: '300px'}}/>
         </Wrapper>
-
     )
 }
 
@@ -19,5 +18,4 @@ flex-direction: column;
 justify-content: center;
 align-items: center;
 gap: 20px;
-
 `

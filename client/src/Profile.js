@@ -3,7 +3,6 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { UserContext } from './UserContext';
 import { useEffect, useState, useContext } from 'react'
 import { ProfileSetup } from './ProfileSetup';
-import { Line } from './GlobalStyles';
 import { LoadingScreen } from './LoadingScreen';
 import { LikeButton } from './LikeButton';
 import { useNavigate } from 'react-router-dom';
@@ -27,7 +26,6 @@ export const Profile = () => {
         }
     }, [userInfo.email])
 
-
     // fetch information for favorited items
     useEffect(()=>{
         if (userInfo.favorites.length > 0) {
@@ -40,7 +38,6 @@ export const Profile = () => {
         }
     }, [userInfo.favorites])
     
-
     if (userInfo.profileSetup) {
         return (
             <>
@@ -57,24 +54,26 @@ export const Profile = () => {
                 <Title style={{background: displayToggle === 'search' && '#E3E2E2'}} onClick={()=>{setDisplayToggle('search')}}>Search Users</Title>
             </TitlesContainer>        
             {displayToggle === 'following' ?
-            <FollowingContainer>
-            {followingUsers && followingUsers.length > 0 ?
-                followingUsers.map(e=>{
-                return(
-                    <FollowedUser>
-                    <Avatar style={{cursor: 'pointer'}}src={e.avatarSrc}
-                    onClick={()=>{navigate(`/user/${e._id}`)}}/>
-                    {e.name ?
-                    <div>{e.name}</div>
-                    :
-                    <div>{e.nickname}</div>
-                    }
-                    </FollowedUser>
-                    )
-                    })
-                    :
-                    <Title>You are not following anyone yet</Title>}
-            </FollowingContainer>       
+            <BackgroundImageFollowing>
+                <FollowingContainer>
+                {followingUsers && followingUsers.length > 0 ?
+                    followingUsers.map(e=>{
+                    return(
+                        <FollowedUser>
+                        <Avatar style={{cursor: 'pointer'}}src={e.avatarSrc}
+                        onClick={()=>{navigate(`/user/${e._id}`)}}/>
+                        {e.name ?
+                        <div>{e.name}</div>
+                        :
+                        <div>{e.nickname}</div>
+                        }
+                        </FollowedUser>
+                        )
+                        })
+                        :
+                        <Title>You are not following anyone yet</Title>}
+                </FollowingContainer>   
+            </BackgroundImageFollowing>    
             
             : displayToggle === 'collection' ?
             userCollection && userInfo.favorites.length > 0 ? 
@@ -105,12 +104,12 @@ export const Profile = () => {
                     :      
                     <></>
                 :
-                <BackgroundImage>
+                <BackgroundImageSearch>
                     <SearchContainer>
                     <div className='searchbar-title'>Search Other Users</div>
                     <UserSearch/>
                     </SearchContainer>
-                </BackgroundImage>
+                </BackgroundImageSearch>
                 }
                 </>
             )
@@ -151,14 +150,8 @@ const FlexContainer = styled.div`
     .user-bio {
         max-width: 400px;
     }
+`
 
-`
-const FollowingContainer = styled.div`
-display: flex;
-padding: 20px;
-gap: 60px;
-justify-content: center;
-`
 
 const FollowedUser = styled.div`
 text-align: center;
@@ -198,19 +191,37 @@ const UserCollection = styled.div`
 display: grid;
 grid-template-columns: 1fr 1fr 1fr 1fr;
 `
+const BackgroundImageFollowing = styled.div`
+background-image: url(https://www.artic.edu/iiif/2/e527f7eb-1a68-a3f9-db3a-c5a52720c083/full/843,/0/default.jpg);
+height: 100%;
+width: 100%;
+filter: grayscale(100%);
+display: flex;
+align-items: center;
+`
 
-const BackgroundImage = styled.div`
+const FollowingContainer = styled.div`
+background: #fff;
+display: flex;
+padding: 20px;
+gap: 60px;
+justify-content: center;
+width: 600px;
+margin: 0 auto;
+min-height: 300px;
+`
+
+const BackgroundImageSearch = styled.div`
 background-image: url(https://www.artic.edu/iiif/2/d141a769-24af-ff07-d792-183ae73ae765/full/843,/0/default.jpg);
 height: 100%;
 width: 100%;
 filter: grayscale(100%);
-height: 100%;
 margin: 16px 0;
 display: flex;
 align-items: center;
-
 margin: 0 auto;
 `
+
 
 const SearchContainer = styled.div`
 background: #fff;

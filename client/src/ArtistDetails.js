@@ -10,13 +10,11 @@ export const ArtistDetails = () => {
     const [artistInfo, setArtistInfo] = useState(null);
     const artistName = useParams().name
 
-
-
     useEffect(()=>{
         // this particular fetch returns very small low quality thumbnail images for each artwork
         // to work around this, the artwork ids returned from the first fetch are pushed to an
         // array, and then used in a second fetch to retrieve images
-        fetch(`https://api.artic.edu/api/v1/artworks/search?q=${artistName}`)
+        fetch(`https://api.artic.edu/api/v1/artworks/search?q=${artistName}&limit=12`)
         .then(res=>res.json())
         .then(data=>{
             let idArray = []

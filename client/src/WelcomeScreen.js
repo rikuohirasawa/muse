@@ -21,7 +21,6 @@ export const WelcomeScreen = () => {
 const BgImageContainer = styled.div`
 background-image: url(https://www.artic.edu/iiif/2/5b5530b8-8322-5ac4-b9be-ff92f578cdd7/full/843,/0/default.jpg);
 height: 100vh;
-
 `
 const Wrapper = styled.div`
 display: flex;

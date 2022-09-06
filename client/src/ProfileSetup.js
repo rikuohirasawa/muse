@@ -10,7 +10,6 @@ export const ProfileSetup = () => {
     const [bioLength, setBioLength] = useState(120);
     const {dispatch} = useContext(UserContext);
     
-
     // fetch avatar options
     useEffect(()=>{
         fetch('https://api.artic.edu/api/v1/artworks?ids=35772,126289,212427,190300&fields=image_id')
@@ -90,7 +89,6 @@ display: flex;
 flex-direction: column;
 align-items: center;
 gap: 1.5rem;
-
 
 .container {
 display: flex;

@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom';
 
-
 export const HomePage = () => {
 
 // arrays of images I liked and had appropriate size to render on the homepage

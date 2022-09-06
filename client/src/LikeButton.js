@@ -33,34 +33,11 @@ const Button = styled.button`
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    border: none;
-    /* width: 28px;
-    height: 28px;
-    border-radius: 50%; */
-
-    /* @keyframes fadein {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
-@keyframes fadeout {
-    from {
-        opacity: 1;
-    }
-    to {
-        opacity: 0;
-    }
-} */
+    border: none;    
     
     .icon {
     font-size: 1.25rem;
     transition: all .1s ease-in-out;
-    /* animation: 1s ease-in 0s 1 fadein;
-    animation: 1s ease-out 0s 1 fadeout; */
     &:hover,
     &:focus {
         transform: scale(1.2)

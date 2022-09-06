@@ -17,7 +17,6 @@ export const ArtworkDetails = () => {
 
     const {userInfo, dispatch} = useContext(UserContext);
  
-    
     // toggle view for provenance text
     const toggleProvDisplay = () => {
         setProvDisplay(!provDisplay)
@@ -36,7 +35,6 @@ export const ArtworkDetails = () => {
         publication_history,exhibition_history,provenance_text`)
         .then(res=>res.json())
         .then((data)=>{
-            console.log(data.data)
             setArtworkDetails(data.data)
         })
     }, []);

@@ -68,7 +68,6 @@ const deleteUserFavorite = async (req, res) => {
     };
 }
 
-
 const followUser = async (req, res) => {
     const client = new MongoClient(MONGO_URI, options);
     const db = client.db('muse');

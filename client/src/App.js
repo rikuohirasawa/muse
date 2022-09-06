@@ -10,7 +10,6 @@ import { ArtistDetails } from './ArtistDetails';
 import { About } from './About';
 import { Profile } from './Profile';
 import { WelcomeScreen } from './WelcomeScreen';
-
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { SearchCollection } from './SearchCollection';
 import { FindUserProfile } from './FindUserProfile';

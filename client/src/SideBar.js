@@ -147,7 +147,6 @@ const Wrapper = styled.div`
     display: flex;
     border-right: 1px solid #E3E2E2;
     margin-right: 20px;
-
 `
 
 const SideBarToggle = styled.div`
@@ -159,7 +158,6 @@ const SideBarToggle = styled.div`
     flex-direction: column;
     transition: all 0.5s ease-in-out;
     justify-content: space-between;
-
 `
 
 const ToggleDisplay = styled.button`
@@ -169,8 +167,6 @@ const ToggleDisplay = styled.button`
     border: none;
     cursor: pointer;
     background: inherit;
-    
-
 `
 
 const FilterForm = styled.form`

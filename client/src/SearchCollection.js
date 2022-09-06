@@ -20,7 +20,7 @@ export const SearchCollection = () => {
         // this particular fetch returns very small low quality thumbnail images for each artwork
         // to work around this, the artwork ids returned from the first fetch are pushed to an
         // array, and then used in a second fetch to retrieve images
-        fetch(`https://api.artic.edu/api/v1/artworks/search?q=${searchTarget}`)
+        fetch(`https://api.artic.edu/api/v1/artworks/search?q=${searchTarget}&limit=12`)
         .then(res=>res.json())
         .then(data=>{
             let idArray = []
@@ -44,7 +44,6 @@ export const SearchCollection = () => {
             console.log(err)
         })
     }, [renderPage, searchTarget])
-
 
         return (
             <Wrapper>

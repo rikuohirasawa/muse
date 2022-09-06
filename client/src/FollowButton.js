@@ -5,7 +5,6 @@ import { UserContext } from './UserContext';
 
 export const FollowButton = ({email, followEmail}) => {
     const { dispatch, userInfo } = useContext(UserContext);
-
     // follow user - updates database and then sets context to reflect new changes
     const clickFollow = (e) => {
         e.stopPropagation();
