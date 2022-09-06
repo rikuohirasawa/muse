@@ -9,7 +9,9 @@ import { LikeButton } from './LikeButton';
 import { useNavigate } from 'react-router-dom';
 import { UserSearch } from './UserSearch';
 
+
 export const Profile = () => {
+    const { isAuthenticated } = useAuth0();
     const {dispatch, userInfo, followingUsers} = useContext(UserContext);
     const [userCollection, setUserCollection] = useState(null);
     const [displayToggle, setDisplayToggle] = useState('collection'); 
@@ -18,7 +20,6 @@ export const Profile = () => {
     // fetch accounts that user is following
     useEffect(()=>{
         if (userInfo.email) {
-            console.log(userInfo.email)
             fetch(`/users/following/${userInfo.email}`)
             .then(res=>res.json())
             .then(data=>{
@@ -34,7 +35,6 @@ export const Profile = () => {
             &fields=title,image_id,artist_title,id,thumbnail`)
             .then(res=>res.json())
             .then(data=>{
-                console.log(data)
                 setUserCollection(data.data)})
             .catch(err=>console.log(err.message))
         }
@@ -55,10 +55,8 @@ export const Profile = () => {
                 <Title style={{background: displayToggle === 'following' && '#E3E2E2'}} onClick={()=>{setDisplayToggle('following')}}>Following</Title>
                 <Title style={{background: displayToggle === 'collection' && '#E3E2E2'}} onClick={()=>{setDisplayToggle('collection')}}>Your Collection</Title>
                 <Title style={{background: displayToggle === 'search' && '#E3E2E2'}} onClick={()=>{setDisplayToggle('search')}}>Search Users</Title>
-            </TitlesContainer>
-            
+            </TitlesContainer>        
             {displayToggle === 'following' ?
-  
             <FollowingContainer>
             {followingUsers && followingUsers.length > 0 ?
                 followingUsers.map(e=>{
@@ -75,15 +73,15 @@ export const Profile = () => {
                     )
                     })
                     :
-                    <div>You are not following anyone yet</div>}
+                    <Title>You are not following anyone yet</Title>}
             </FollowingContainer>       
             
             : displayToggle === 'collection' ?
             userCollection && userInfo.favorites.length > 0 ? 
                 <UserCollection>
-                    {userCollection.map(e=>{
+                    {userCollection.map((e, index)=>{
                         return (
-                            <ArtContainer>
+                            <ArtContainer key={index}>
                                 <LikeButton id={e.id}
                                 style={{
                                     position: 'relative',
@@ -91,7 +89,7 @@ export const Profile = () => {
                                     top: '8%',
                                     zIndex: '2'}}/>
                                 <Artwork src={`https://www.artic.edu/iiif/2/${e.image_id}/full/843,/0/default.jpg`}
-                                alt={e.thumbnail.alt_text ? e.thumbnail.alt_text : 'No alt text provided by API, sorry 🙁'}
+                                alt={e.thumbnail ? e.thumbnail.alt_text : 'No alt text provided by API, sorry 🙁'}
                                 onClick={()=>{navigate(`/artwork/${e.id}`)}}/>
                                 <div>{e.title}</div>
                                 <div>{e.artist_title}</div>
@@ -116,9 +114,13 @@ export const Profile = () => {
                 }
                 </>
             )
-        } else {
+        } else if (isAuthenticated && userInfo.email && !userInfo.profileSetup) {
             return (
                 <ProfileSetup/>
+            )
+        } else {
+            return (
+                <LoadingScreen/>
             )
         }
 }

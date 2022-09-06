@@ -1,7 +1,6 @@
 const express = require('express');
 const morgan = require('morgan');
 
-const { getArtIds } = require('./handlers/apiCalls');
 const { getSampleArt } = require('./handlers/sampleArt');
 const { 
     getUserByEmail, 

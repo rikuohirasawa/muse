@@ -35,6 +35,7 @@ export const ArtworkDetails = () => {
         publication_history,exhibition_history,provenance_text`)
         .then(res=>res.json())
         .then((data)=>{
+            console.log(data.data)
             setArtworkDetails(data.data)
         })
     }, []);
@@ -73,15 +74,18 @@ export const ArtworkDetails = () => {
                     <ApiLink href={artworkDetails.api_link}>API Link</ApiLink>
                 </InformationContainer>
                 <ImageContainer>
-                {userInfo.profileSetup && 
                 <LikeButton 
                 style={{margin: '0 10px -35px 0',
                     zIndex: '2'}}
                 id={artworkDetails.id} 
-                />}
-                    <Image 
-                    src={`https://www.artic.edu/iiif/2/${artworkDetails.image_id}/full/843,/0/default.jpg`}
-                    alt={artworkDetails.thumbnail.alt_text ? artworkDetails.thumbnail.alt_text : 'No alt text provided by API, sorry 🙁'}/>
+                />
+                {artworkDetails.image_id ?
+                <Image 
+                src={`https://www.artic.edu/iiif/2/${artworkDetails.image_id}/full/843,/0/default.jpg`}
+                alt={artworkDetails.thumbnail ? artworkDetails.thumbnail.alt_text : 'No alt text provided by API, sorry 🙁'}/>
+                :
+                <div style={{marginLeft: '60px'}}>No image provided</div>
+                }
                 </ImageContainer>
                 {artworkDetails.provenance_text || artworkDetails.exhibition_history ?
                 <ReadMoreContainer>

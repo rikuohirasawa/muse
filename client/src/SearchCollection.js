@@ -54,23 +54,26 @@ export const SearchCollection = () => {
                 <Content>
                 {searchInfo.map((element)=>{
                         return (
-                            <ArtPieceContainer >
+                            <ArtPieceContainer>
                                 <ImageContainer>
-                                <LikeButton 
-                                style={{margin: '0 10px -27px 0',
-                                zIndex: '2'}}
-                                id={element.id} 
-                                />
-                                <Image 
-                                src={`https://www.artic.edu/iiif/2/${element.image_id}/full/843,/0/default.jpg`}
-                                alt={element.thumbnail.alt_text ? element.thumbnail.alt_text : 'No alt text provided by API, sorry 🙁'}
-                                onClick={()=>{navigate(`/artwork/${element.id}`)}}/>
-                                </ImageContainer>         
-                                <div>{element.title} ({element.date_display})</div>
-                                <LinkPath to={`/artist/${element.artist_title}`}>{element.artist_title}</LinkPath>
-                                <div>{element.category_titles.map(e=>{
-                                    return <LinkPath to={`/collection/${e}`} onClick={()=>onClickCategory()} className='categories'> {e} </LinkPath>
-                                })}</div>
+                                    <LikeButton 
+                                    style={{margin: '0 10px -27px 0',
+                                    zIndex: '2'}}
+                                    id={element.id} 
+                                    />
+                                    {element.image_id ?                                     <Image 
+                                    src={`https://www.artic.edu/iiif/2/${element.image_id}/full/843,/0/default.jpg`}
+                                    alt={element.thumbnail ? element.thumbnail.alt_text : 'No alt text provided by API, sorry 🙁'}
+                                    onClick={()=>{navigate(`/artwork/${element.id}`)}}/>
+                                    :
+                                    <div onClick={()=>{navigate(`/artwork/${element.id}`)}} style={{padding: '40px 0', cursor: 'pointer'}}>No image provided</div>}
+
+                                    </ImageContainer>         
+                                    <div>{element.title} ({element.date_display})</div>
+                                    <LinkPath to={`/artist/${element.artist_title}`}>{element.artist_title}</LinkPath>
+                                    <div>{element.category_titles.map(e=>{
+                                        return <LinkPath to={`/collection/${e}`} onClick={()=>onClickCategory()} className='categories'> {e} </LinkPath>
+                                    })}</div>
                             </ArtPieceContainer>                  
                         )
                     })}

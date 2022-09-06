@@ -57,10 +57,15 @@ export const ViewSampleArt = () => {
                                         </>
                                         }
                                 </InformationContainer>
-                                <Image 
-                                src={`https://www.artic.edu/iiif/2/${element.image_id}/full/843,/0/default.jpg`}
-                                alt={element.thumbnail.alt_text ? element.thumbnail.alt_text : 'No alt text provided by API, sorry 🙁'}
-                               onClick={()=>{handleClick(element.id)}}/>
+                                {element.image_id ?
+                                 <Image 
+                                 src={`https://www.artic.edu/iiif/2/${element.image_id}/full/843,/0/default.jpg`}
+                                 alt={element.thumbnail ? element.thumbnail.alt_text : 'No alt text provided by API, sorry 🙁'}
+                                onClick={()=>{handleClick(element.id)}}/>
+                                :
+                                <div onClick={()=>{handleClick(element.id)}} style={{cursor: 'pointer'}}>No image provided</div>
+                                }
+                    
                             </Content>
                             </SwiperSlide>)}})}
                             </Swiper>

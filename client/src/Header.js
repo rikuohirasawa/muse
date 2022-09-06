@@ -1,14 +1,10 @@
 import styled from 'styled-components';
-
 import {AiOutlineSearch} from 'react-icons/ai';
 import { Link, useNavigate } from 'react-router-dom';
 import { SignInButton } from './SignInButton';
 import { SignOutButton } from './SignOutButton';
-
 import { useAuth0 } from "@auth0/auth0-react";
 import { useEffect, useContext } from 'react';
-
-
 import { UserContext } from './UserContext';
 import { useLocation } from 'react-router-dom';
 
@@ -17,14 +13,12 @@ export const Header = () => {
     const location = useLocation();
     const { user, isAuthenticated, isLoading } = useAuth0();
     const {dispatch} = useContext(UserContext);
-
-
+    
     // post new user data to database when auth0 is authenticated - I would prefer to post data
     // on the form submit but I am not too familiar with auth0 yet, and how I can target the form/form
     // events - I will likely come back in the future and fix this when I become more familiar
     useEffect(()=>{
         if (isAuthenticated) {
-            console.log(isAuthenticated)
             fetch('/user/new-user', {
                 method: 'POST',
                 headers: {
