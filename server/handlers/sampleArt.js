@@ -1,5 +1,9 @@
 const request = require('request-promise');
 
+// NOTE: this function is not used for now as making 8 different api calls was making the page load very slowly
+// please see getCarouselArt.js for the solution I implemented instead
+// this solution would be ideal if it did not affect load times, as it does actually return random pieces of art,
+// whereas my new solution pulls from a static array of my own selections 
 const getSampleArt = async (req, res) => {
     try {
         // loop to create array of random art pieces
@@ -20,13 +24,12 @@ const getSampleArt = async (req, res) => {
             getRandomArtArray.push(result.data[0])
         }
         if (getRandomArtArray.length > 0) {
-            console.log(getRandomArtArray)
             res.status(200).json({
                 status: 200,
                 data: getRandomArtArray
             })
         } else {
-            res.status(400).json({
+            res.status(404).json({
                 status: 404,
                 message: 'Request failed'
             })

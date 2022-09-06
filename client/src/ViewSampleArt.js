@@ -21,14 +21,12 @@ export const ViewSampleArt = () => {
     }
     
     useEffect(()=>{
-        fetch('/api/sample-art')
+        fetch('/api/carousel-art')
             .then(res=>res.json())
             .then((data)=>{
-                console.log(data)
-                setSampleArt(data.data)
+                setSampleArt(data.data.data)
             }).catch(err =>{ console.log (err.message)})
     }, []);
-    
     if (sampleArt.length > 0) {
         return (
             <Container>
