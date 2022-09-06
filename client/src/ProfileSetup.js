@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import { useAuth0 } from "@auth0/auth0-react";
 import { UserContext } from './UserContext';
 import { useEffect, useState, useContext } from 'react'
+import { useNavigate } from 'react-router-dom';
 
 export const ProfileSetup = () => {
     const { user } = useAuth0();
@@ -9,6 +10,7 @@ export const ProfileSetup = () => {
     const [selectAvatar, setSelectAvatar] = useState(null);
     const [bioLength, setBioLength] = useState(120);
     const {dispatch} = useContext(UserContext);
+    const navigate = useNavigate();
     
     // fetch avatar options
     useEffect(()=>{
@@ -27,6 +29,7 @@ export const ProfileSetup = () => {
     
     const saveChanges = (e) => {
         e.preventDefault();
+  
         const form = new FormData(document.forms.profileForm);
         const formObj = {
             email: user.email,
@@ -40,7 +43,10 @@ export const ProfileSetup = () => {
                 'Content-Type': 'application/json'
             }, body: JSON.stringify(formObj)
         }).then(res=>res.json())
-        .then(data=>dispatch({type: 'set-user-info', userInfo: data.data}))
+        .then(data=>{
+            dispatch({type: 'set-user-info', userInfo: data.data})
+            navigate('/profile')
+        })
         .catch(err=>console.log(err.message))
     }
     
