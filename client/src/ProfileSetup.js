@@ -58,7 +58,7 @@ export const ProfileSetup = () => {
             <Label for='name'>Preferred name</Label>
             <Input type='text' name='name' id='name' className='name-input' required/>
             </div>
-            <div>Choose an avatar (you can change this later).</div>
+            <div>Choose an avatar.</div>
             <div className='avatar-container'>
             {placeholderAvatars.map(e=>{
                 return (
