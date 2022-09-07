@@ -151,7 +151,6 @@ const Wrapper = styled.div`
 
 const SideBarToggle = styled.div`
     transition: all 0.5s ease-in-out;
-    min-height: 100vh;
     border-right: 1px solid #E3E2E2;
     display: flex;
     justify-content: space-between;
@@ -161,7 +160,6 @@ const SideBarToggle = styled.div`
 `
 
 const ToggleDisplay = styled.button`
-    height: 100vh;
     transition: all 0.5s ease-in-out;
     font-size: 1rem;
     border: none;

@@ -14,7 +14,7 @@ export const ProfileSetup = () => {
     
     // fetch avatar options
     useEffect(()=>{
-        fetch('https://api.artic.edu/api/v1/artworks?ids=35772,126289,212427,190300&fields=image_id')
+        fetch('https://api.artic.edu/api/v1/artworks?ids=74965,118718,212427,81539&fields=image_id')
         .then(res=>res.json())
         .then(data=>setPlaceholderAvatars(data.data))
     },[]);
@@ -27,9 +27,7 @@ export const ProfileSetup = () => {
         setBioLength(120 - e.target.value.length)
     }
     
-    const saveChanges = (e) => {
-        e.preventDefault();
-  
+    const saveChanges = (e) => {  
         const form = new FormData(document.forms.profileForm);
         const formObj = {
             email: user.email,

@@ -50,6 +50,7 @@ const FlexRow = styled.div`
   display: flex;
   background: transparent;
   z-index: -1;
+  overflow: auto;
   `
 // container to make footer stick to the bottom of page
 const FlexColumn = styled.div`
