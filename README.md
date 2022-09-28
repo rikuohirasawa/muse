@@ -16,3 +16,18 @@ I hope you enjoy 😊
 
 - Rikuo
 
+# Getting Started
+
+## Available Scripts
+
+In the server directory, you can run:
+
+### 'yarn start'
+
+Spins up nodemon server
+
+In the client directory, you can run: 
+
+### 'yarn start'
+
+Runs the app in development mode.
