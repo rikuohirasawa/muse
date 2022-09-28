@@ -20,13 +20,13 @@ I hope you enjoy 😊
 
 ## Available Scripts
 
-In the server directory, you can run:
+## In the server directory, you can run:
 
 ### 'yarn start'
 
 Spins up nodemon server
 
-In the client directory, you can run: 
+## In the client directory, you can run: 
 
 ### 'yarn start'
 
